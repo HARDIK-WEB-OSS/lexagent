@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LexAgent — Contract Intelligence</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --surface: #111118;
+      --surface2: #18181f;
+      --surface3: #1f1f28;
+      --border: #2a2a38;
+      --border-bright: #3d3d52;
+      --text: #e8e8f0;
+      --text-muted: #8080a0;
+      --text-dim: #5a5a78;
+      --accent: #7c6dfa;
+      --accent-bright: #9d91ff;
+      --accent-glow: rgba(124, 109, 250, 0.15);
+      --critical: #ff4d4d;
+      --critical-bg: rgba(255, 77, 77, 0.1);
+      --high: #ff8c42;
+      --high-bg: rgba(255, 140, 66, 0.1);
+      --medium: #ffd166;
+      --medium-bg: rgba(255, 209, 102, 0.1);
+      --low: #06d6a0;
+      --low-bg: rgba(6, 214, 160, 0.1);
+      --none: #4a4a60;
+      --none-bg: rgba(74, 74, 96, 0.1);
+      --mono: 'Space Mono', monospace;
+      --sans: 'DM Sans', sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 14px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    #root { min-height: 100vh; }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: var(--surface); }
+    ::-webkit-scrollbar-thumb { background: var(--border-bright); border-radius: 3px; }
+
+    /* Typography */
+    h1, h2, h3, h4 { font-weight: 600; letter-spacing: -0.02em; }
+    code, .mono { font-family: var(--mono); font-size: 0.85em; }
+
+    /* Layout */
+    .app-header {
+      border-bottom: 1px solid var(--border);
+      padding: 16px 32px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      position: sticky;
+      top: 0;
+      background: rgba(10, 10, 15, 0.95);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+    }
+
+    .logo-mark {
+      width: 32px; height: 32px;
+      background: linear-gradient(135deg, var(--accent), #c084fc);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--mono);
+      font-weight: 700;
+      font-size: 14px;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .logo-text {
+      font-family: var(--mono);
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--text);
+    }
+
+    .logo-sub {
+      font-size: 11px;
+      color: var(--text-dim);
+      margin-left: 4px;
+      font-family: var(--mono);
+    }
+
+    .health-badge {
+      margin-left: auto;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .badge-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .health-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      color: var(--text-muted);
+      font-family: var(--mono);
+    }
+
+    .main-content {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 32px;
+    }
+
+    /* Upload Panel */
+    .upload-panel {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--surface);
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+
+    .upload-inner {
+      padding: 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .drop-zone {
+      width: 100%;
+      max-width: 520px;
+      border: 2px dashed var(--border-bright);
+      border-radius: 10px;
+      padding: 40px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: var(--surface2);
+      position: relative;
+    }
+
+    .drop-zone:hover, .drop-zone.drag-over {
+      border-color: var(--accent);
+      background: var(--accent-glow);
+    }
+
+    .drop-zone input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+    }
+
+    .drop-icon {
+      font-size: 36px;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .drop-label {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .drop-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-family: var(--mono);
+    }
+
+    .selected-file {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--accent-glow);
+      border: 1px solid var(--accent);
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--accent-bright);
+      max-width: 520px;
+      width: 100%;
+    }
+
+    .btn-analyze {
+      background: linear-gradient(135deg, var(--accent), #9d60f8);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 32px;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: var(--sans);
+      cursor: pointer;
+      transition: all 0.2s;
+      letter-spacing: 0.01em;
+    }
+
+    .btn-analyze:hover:not(:disabled) {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(124, 109, 250, 0.35);
+    }
+
+    .btn-analyze:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* Status Bar */
+    .status-bar {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--surface);
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+      font-family: var(--mono);
+      font-size: 13px;
+    }
+
+    .spinner {
+      width: 16px; height: 16px;
+      border: 2px solid var(--border-bright);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .status-ok { color: var(--low); }
+    .status-err { color: var(--critical); }
+    .status-proc { color: var(--accent-bright); }
+
+    /* Risk Dashboard */
+    .section-title {
+      font-size: 11px;
+      font-family: var(--mono);
+      color: var(--text-dim);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 220px 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .panel {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--surface);
+      padding: 20px;
+    }
+
+    /* Gauge */
+    .gauge-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .gauge-svg { width: 160px; height: 90px; overflow: visible; }
+
+    .gauge-score {
+      font-family: var(--mono);
+      font-size: 28px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .gauge-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-align: center;
+      font-family: var(--mono);
+      letter-spacing: 0.08em;
+    }
+
+    /* Risk bar chart */
+    .risk-bars {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      justify-content: center;
+    }
+
+    .risk-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .risk-bar-label {
+      width: 64px;
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--text-muted);
+      text-align: right;
+    }
+
+    .risk-bar-track {
+      flex: 1;
+      height: 8px;
+      background: var(--surface3);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .risk-bar-fill {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.6s ease;
+    }
+
+    .risk-bar-count {
+      width: 24px;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      text-align: left;
+    }
+
+    /* Meta panel */
+    .meta-rows { display: flex; flex-direction: column; gap: 10px; }
+
+    .meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .meta-row:last-child { border-bottom: none; padding-bottom: 0; }
+
+    .meta-key {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-family: var(--mono);
+    }
+
+    .meta-val {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      font-family: var(--mono);
+    }
+
+    /* Clause Cards */
+    .clause-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; }
+
+    .clause-card {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--surface);
+      padding: 16px 20px;
+      transition: border-color 0.2s;
+    }
+
+    .clause-card:hover { border-color: var(--border-bright); }
+
+    .clause-card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .clause-id {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-dim);
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2px 6px;
+    }
+
+    .risk-badge {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      padding: 2px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    .badge-CRITICAL { background: var(--critical-bg); color: var(--critical); border: 1px solid var(--critical); }
+    .badge-HIGH     { background: var(--high-bg);     color: var(--high);     border: 1px solid var(--high); }
+    .badge-MEDIUM   { background: var(--medium-bg);   color: var(--medium);   border: 1px solid var(--medium); }
+    .badge-LOW      { background: var(--low-bg);      color: var(--low);      border: 1px solid var(--low); }
+    .badge-NONE     { background: var(--none-bg);     color: var(--none);     border: 1px solid var(--none); }
+
+    .clause-label-tag {
+      font-size: 11px;
+      color: var(--accent-bright);
+      background: var(--accent-glow);
+      border: 1px solid var(--accent);
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-family: var(--mono);
+    }
+
+    .clause-reason {
+      font-size: 13px;
+      color: var(--text);
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+
+    .clause-negotiation {
+      font-size: 12px;
+      color: var(--text-muted);
+      background: var(--surface2);
+      border-left: 3px solid var(--accent);
+      padding: 8px 12px;
+      border-radius: 0 6px 6px 0;
+      margin-top: 8px;
+    }
+
+    .clause-percentile {
+      font-size: 11px;
+      color: var(--medium);
+      font-family: var(--mono);
+      margin-top: 8px;
+    }
+
+    /* Contradictions */
+    .contra-card {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--surface);
+      padding: 16px 20px;
+      margin-bottom: 10px;
+    }
+
+    .contra-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .contra-type {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .contra-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .contra-clauses {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .contra-clause {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 10px 12px;
+      font-size: 11px;
+      font-family: var(--mono);
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .contra-clause-id {
+      font-weight: 700;
+      color: var(--text-dim);
+      margin-bottom: 4px;
+    }
+
+    /* Missing clauses */
+    .missing-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .missing-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .missing-icon {
+      color: var(--medium);
+      font-size: 14px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* Summary */
+    .summary-box {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--surface);
+      padding: 24px;
+      margin-bottom: 24px;
+      font-size: 14px;
+      line-height: 1.8;
+      color: var(--text);
+      white-space: pre-wrap;
+    }
+
+    /* Export Button */
+    .btn-export {
+      background: var(--surface2);
+      color: var(--text);
+      border: 1px solid var(--border-bright);
+      border-radius: 8px;
+      padding: 10px 24px;
+      font-size: 13px;
+      font-family: var(--mono);
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-export:hover {
+      border-color: var(--accent);
+      color: var(--accent-bright);
+    }
+
+    /* Section header row */
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .count-tag {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-dim);
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 2px 10px;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 32px;
+      color: var(--text-dim);
+      font-family: var(--mono);
+      font-size: 13px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--surface);
+      margin-bottom: 24px;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 32px 0;
+    }
+
+    @media (max-width: 900px) {
+      .dashboard-grid { grid-template-columns: 1fr; }
+      .contra-clauses { grid-template-columns: 1fr; }
+      .main-content { padding: 16px; }
+      .upload-inner { padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel">
+const { useState, useEffect, useRef, useCallback } = React;
+
+// ── Helpers ──────────────────────────────────────────────────────────
+const riskColor = {
+  CRITICAL: 'var(--critical)', HIGH: 'var(--high)',
+  MEDIUM: 'var(--medium)', LOW: 'var(--low)', NONE: 'var(--none)',
+};
+
+const riskOrder = ['CRITICAL', 'HIGH', 'MEDIUM', 'LOW', 'NONE'];
+
+function RiskBadge({ level }) {
+  return <span className={`risk-badge badge-${level}`}>{level}</span>;
+}
+
+// ── Gauge Component ───────────────────────────────────────────────────
+function RiskGauge({ score }) {
+  const pct = Math.max(0, Math.min(1, score));
+  const color = pct >= 0.75 ? 'var(--critical)' : pct >= 0.5 ? 'var(--high)' : pct >= 0.25 ? 'var(--medium)' : 'var(--low)';
+  const angle = pct * 180 - 90; // -90 to 90 degrees
+  const rad = (angle * Math.PI) / 180;
+  const r = 70, cx = 80, cy = 80;
+  const needleX = cx + r * Math.cos(rad);
+  const needleY = cy + r * Math.sin(rad);
+
+  return (
+    <div className="gauge-wrap">
+      <svg className="gauge-svg" viewBox="0 0 160 90">
+        {/* Background arc */}
+        <path d="M 10 80 A 70 70 0 0 1 150 80" fill="none" stroke="var(--surface3)" strokeWidth="10" strokeLinecap="round"/>
+        {/* Colored segments */}
+        {[[0,0.25,'var(--low)'],[0.25,0.5,'var(--medium)'],[0.5,0.75,'var(--high)'],[0.75,1,'var(--critical)']].map(([s, e, c]) => {
+          const startAngle = s * Math.PI - Math.PI;
+          const endAngle = e * Math.PI - Math.PI;
+          const x1 = cx + r * Math.cos(startAngle), y1 = cy + r * Math.sin(startAngle);
+          const x2 = cx + r * Math.cos(endAngle), y2 = cy + r * Math.sin(endAngle);
+          return <path key={c} d={`M ${x1} ${y1} A ${r} ${r} 0 0 1 ${x2} ${y2}`} fill="none" stroke={c} strokeWidth="10" strokeLinecap="butt" opacity="0.5"/>;
+        })}
+        {/* Needle */}
+        <line x1={cx} y1={cy} x2={needleX} y2={needleY} stroke={color} strokeWidth="2.5" strokeLinecap="round"/>
+        <circle cx={cx} cy={cy} r="5" fill={color}/>
+      </svg>
+      <div className="gauge-score" style={{ color }}>{(pct * 100).toFixed(0)}%</div>
+      <div className="gauge-label">OVERALL RISK</div>
+    </div>
+  );
+}
+
+// ── Health Badge ──────────────────────────────────────────────────────
+function HealthBadge({ health }) {
+  if (!health) return null;
+  return (
+    <div className="health-badge">
+      {[['OLLAMA', health.ollama], ['CHROMA', health.chromadb], ['GPU', health.gpu]].map(([label, ok]) => (
+        <div key={label} className="health-item">
+          <span className="badge-dot" style={{ background: ok ? 'var(--low)' : 'var(--critical)' }}/>
+          {label}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// ── Main App ─────────────────────────────────────────────────────────
+function App() {
+  const [file, setFile] = useState(null);
+  const [dragging, setDragging] = useState(false);
+  const [jobId, setJobId] = useState(null);
+  const [status, setStatus] = useState('idle'); // idle | processing | complete | error
+  const [report, setReport] = useState(null);
+  const [errorMsg, setErrorMsg] = useState('');
+  const [health, setHealth] = useState(null);
+  const pollRef = useRef(null);
+
+  // Fetch health on mount
+  useEffect(() => {
+    fetch('/health').then(r => r.json()).then(setHealth).catch(() => {});
+  }, []);
+
+  // Poll for job completion
+  useEffect(() => {
+    if (status === 'processing' && jobId) {
+      pollRef.current = setInterval(async () => {
+        try {
+          const res = await fetch(`/status/${jobId}`);
+          const data = await res.json();
+          if (data.status === 'complete') {
+            clearInterval(pollRef.current);
+            setStatus('complete');
+            setReport(data.result);
+          } else if (data.status === 'error') {
+            clearInterval(pollRef.current);
+            setStatus('error');
+            setErrorMsg(data.error || 'Analysis failed.');
+          }
+        } catch (e) {
+          clearInterval(pollRef.current);
+          setStatus('error');
+          setErrorMsg('Lost connection to server.');
+        }
+      }, 2000);
+    }
+    return () => clearInterval(pollRef.current);
+  }, [status, jobId]);
+
+  const handleFileChange = (e) => {
+    const f = e.target.files?.[0];
+    if (f) setFile(f);
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    setDragging(false);
+    const f = e.dataTransfer.files?.[0];
+    if (f) setFile(f);
+  };
+
+  const handleAnalyze = async () => {
+    if (!file) return;
+    setStatus('processing');
+    setReport(null);
+    setErrorMsg('');
+
+    const form = new FormData();
+    form.append('file', file);
+
+    try {
+      const res = await fetch('/analyze', { method: 'POST', body: form });
+      if (!res.ok) {
+        const err = await res.json();
+        throw new Error(err.detail || 'Upload failed.');
+      }
+      const data = await res.json();
+      setJobId(data.job_id);
+    } catch (e) {
+      setStatus('error');
+      setErrorMsg(e.message);
+    }
+  };
+
+  const handleExport = () => {
+    if (!report) return;
+    const blob = new Blob([JSON.stringify(report, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `lexagent_${report.contract_id?.slice(0,8)}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const totalClauses = report?.total_clauses || 0;
+  const maxCount = report ? Math.max(...Object.values(report.risk_distribution || {}), 1) : 1;
+
+  return (
+    <div>
+      {/* Header */}
+      <div className="app-header">
+        <div className="logo-mark">Lx</div>
+        <div>
+          <span className="logo-text">LEXAGENT</span>
+          <span className="logo-sub">/ contract intelligence</span>
+        </div>
+        <HealthBadge health={health} />
+      </div>
+
+      <div className="main-content">
+
+        {/* Upload Panel */}
+        <div className="upload-panel">
+          <div className="upload-inner">
+            <div
+              className={`drop-zone ${dragging ? 'drag-over' : ''}`}
+              onDragOver={(e) => { e.preventDefault(); setDragging(true); }}
+              onDragLeave={() => setDragging(false)}
+              onDrop={handleDrop}
+            >
+              <span className="drop-icon">⬆</span>
+              <div className="drop-label">Drop contract here or click to browse</div>
+              <div className="drop-sub">PDF · DOCX · Max 20 MB</div>
+              <input type="file" accept=".pdf,.docx,.doc" onChange={handleFileChange} />
+            </div>
+
+            {file && (
+              <div className="selected-file">
+                <span>📄</span>
+                <span>{file.name}</span>
+                <span style={{ marginLeft: 'auto', color: 'var(--text-dim)' }}>
+                  {(file.size / 1024).toFixed(1)} KB
+                </span>
+              </div>
+            )}
+
+            <button
+              className="btn-analyze"
+              onClick={handleAnalyze}
+              disabled={!file || status === 'processing'}
+            >
+              {status === 'processing' ? 'Analyzing…' : 'Analyze Contract'}
+            </button>
+          </div>
+        </div>
+
+        {/* Status Bar */}
+        {status === 'processing' && (
+          <div className="status-bar">
+            <div className="spinner" />
+            <span className="status-proc mono">Running 6-agent pipeline… This may take 60–120 seconds on first run (model loading).</span>
+          </div>
+        )}
+        {status === 'error' && (
+          <div className="status-bar">
+            <span style={{ color: 'var(--critical)' }}>✕</span>
+            <span className="status-err mono">{errorMsg}</span>
+          </div>
+        )}
+
+        {/* ── Report ─────────────────────────────────────────────────── */}
+        {status === 'complete' && report && (<>
+
+          {/* Risk Dashboard */}
+          <div className="section-title">Risk Dashboard</div>
+          <div className="dashboard-grid">
+            {/* Gauge */}
+            <div className="panel">
+              <RiskGauge score={report.overall_risk_score} />
+            </div>
+
+            {/* Distribution bars */}
+            <div className="panel">
+              <div className="section-title">Distribution</div>
+              <div className="risk-bars">
+                {riskOrder.map(level => {
+                  const count = report.risk_distribution?.[level] || 0;
+                  return (
+                    <div key={level} className="risk-bar-row">
+                      <div className="risk-bar-label">{level}</div>
+                      <div className="risk-bar-track">
+                        <div
+                          className="risk-bar-fill"
+                          style={{
+                            width: `${(count / maxCount) * 100}%`,
+                            background: riskColor[level],
+                          }}
+                        />
+                      </div>
+                      <div className="risk-bar-count" style={{ color: riskColor[level] }}>{count}</div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Meta */}
+            <div className="panel">
+              <div className="section-title">Document Info</div>
+              <div className="meta-rows">
+                <div className="meta-row">
+                  <span className="meta-key">TYPE</span>
+                  <span className="meta-val">{report.document_type}</span>
+                </div>
+                <div className="meta-row">
+                  <span className="meta-key">PAGES</span>
+                  <span className="meta-val">{report.pages}</span>
+                </div>
+                <div className="meta-row">
+                  <span className="meta-key">CLAUSES</span>
+                  <span className="meta-val">{report.total_clauses}</span>
+                </div>
+                <div className="meta-row">
+                  <span className="meta-key">METHOD</span>
+                  <span className="meta-val">{report.extraction_method}</span>
+                </div>
+                <div className="meta-row">
+                  <span className="meta-key">ID</span>
+                  <span className="meta-val">{report.contract_id?.slice(0,8)}…</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr className="divider" />
+
+          {/* Critical / High Clauses */}
+          <div className="section-header">
+            <div className="section-title" style={{ marginBottom: 0 }}>Critical &amp; High Risk Clauses</div>
+            <span className="count-tag">{report.critical_clauses?.length || 0}</span>
+          </div>
+
+          {(!report.critical_clauses || report.critical_clauses.length === 0) ? (
+            <div className="empty-state">✓ No critical or high-risk clauses detected.</div>
+          ) : (
+            <div className="clause-list">
+              {report.critical_clauses.map((c, i) => (
+                <div key={i} className="clause-card">
+                  <div className="clause-card-header">
+                    <span className="clause-id">{c.clause_id}</span>
+                    <RiskBadge level={c.risk_level} />
+                    <span className="clause-label-tag">{c.label}</span>
+                    {c.label_score != null && (
+                      <span style={{ marginLeft: 'auto', fontSize: 11, fontFamily: 'var(--mono)', color: 'var(--text-dim)' }}>
+                        conf {(c.label_score * 100).toFixed(0)}%
+                      </span>
+                    )}
+                  </div>
+                  <div className="clause-reason">{c.risk_reason}</div>
+                  {c.negotiation_point && (
+                    <div className="clause-negotiation">
+                      <strong style={{ color: 'var(--accent-bright)' }}>Negotiate: </strong>
+                      {c.negotiation_point}
+                    </div>
+                  )}
+                  {report.comparative_scores?.[c.clause_id]?.verdict && (
+                    <div className="clause-percentile">
+                      ⚡ {report.comparative_scores[c.clause_id].verdict}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+
+          <hr className="divider" />
+
+          {/* Contradictions */}
+          <div className="section-header">
+            <div className="section-title" style={{ marginBottom: 0 }}>Contradictions Detected</div>
+            <span className="count-tag">{report.contradictions?.length || 0}</span>
+          </div>
+
+          {(!report.contradictions || report.contradictions.length === 0) ? (
+            <div className="empty-state">✓ No contradictions detected between clauses.</div>
+          ) : report.contradictions.map((c, i) => (
+            <div key={i} className="contra-card">
+              <div className="contra-header">
+                <RiskBadge level={c.severity} />
+                <span className="contra-type">{c.contradiction_type}</span>
+              </div>
+              <div className="contra-desc">{c.description}</div>
+              <div className="contra-clauses">
+                <div className="contra-clause">
+                  <div className="contra-clause-id">§ {c.clause_a_id}</div>
+                  {c.clause_a_text}
+                </div>
+                <div className="contra-clause">
+                  <div className="contra-clause-id">§ {c.clause_b_id}</div>
+                  {c.clause_b_text}
+                </div>
+              </div>
+            </div>
+          ))}
+
+          <hr className="divider" />
+
+          {/* Missing Clauses */}
+          <div className="section-header">
+            <div className="section-title" style={{ marginBottom: 0 }}>Missing Protections</div>
+            <span className="count-tag">{report.missing_clauses?.length || 0}</span>
+          </div>
+
+          {(!report.missing_clauses || report.missing_clauses.length === 0) ? (
+            <div className="empty-state">✓ All key protective clauses appear to be present.</div>
+          ) : (
+            <div className="missing-list">
+              {report.missing_clauses.map((m, i) => (
+                <div key={i} className="missing-item">
+                  <span className="missing-icon">⚠</span>
+                  <span>{m}</span>
+                </div>
+              ))}
+            </div>
+          )}
+
+          <hr className="divider" />
+
+          {/* Plain English Summary */}
+          <div className="section-title">Plain English Summary</div>
+          <div className="summary-box">{report.plain_english_summary || 'Summary not available.'}</div>
+
+          {/* Export */}
+          <button className="btn-export" onClick={handleExport}>
+            ↓ Export Full JSON Report
+          </button>
+
+        </>)}
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>
