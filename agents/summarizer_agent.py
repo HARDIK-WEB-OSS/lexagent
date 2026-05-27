@@ -1,3 +1,4 @@
+import os
 """
 Agent 6: Summarizer + Memory Agent
 Calls Ollama for plain-English summary, stores clauses in ChromaDB,
