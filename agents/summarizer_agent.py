@@ -12,7 +12,7 @@ import requests
 
 logger = logging.getLogger(__name__)
 
-OLLAMA_URL = "http://localhost:11434/api/generate"
+OLLAMA_URL = os.getenv("OLLAMA_URL", "http://localhost:11434/api/generate")
 OLLAMA_MODEL = "mistral:7b"
 CHROMA_COLLECTION = "contract_clauses"
 EMBEDDING_MODEL = "all-MiniLM-L6-v2"
