@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: lexagent-api
+    env: python
+    buildCommand: pip install -r requirements-cloud.txt
+    startCommand: uvicorn api.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: CLOUD_DEPLOY
+        value: "true"
+      - key: PYTHONUNBUFFERED
+        value: "true"

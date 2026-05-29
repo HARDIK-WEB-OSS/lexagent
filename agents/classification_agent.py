@@ -124,6 +124,11 @@ class ClassificationAgent:
         self._load_model()
 
     def _load_model(self):
+        import os
+        if os.getenv("CLOUD_DEPLOY"):
+            logger.info("CLOUD_DEPLOY=true — using keyword classification (no torch needed).")
+            self._pipeline_loaded = False
+            return
         try:
             from transformers import pipeline
 

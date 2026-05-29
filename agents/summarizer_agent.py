@@ -60,6 +60,11 @@ class SummarizerAgent:
             self._collection = None
 
     def _init_embedding_model(self):
+        import os
+        if os.getenv("CLOUD_DEPLOY"):
+            logger.info("CLOUD_DEPLOY=true — skipping embedding model (no sentence-transformers).")
+            self._embedding_model = None
+            return
         try:
             from sentence_transformers import SentenceTransformer
             self._embedding_model = SentenceTransformer(EMBEDDING_MODEL)
