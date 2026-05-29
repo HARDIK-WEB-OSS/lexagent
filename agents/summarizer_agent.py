@@ -46,6 +46,12 @@ class SummarizerAgent:
         self._init_embedding_model()
 
     def _init_chromadb(self):
+        import os
+        if os.getenv("CLOUD_DEPLOY"):
+            logger.info("CLOUD_DEPLOY=true — skipping ChromaDB.")
+            self._chroma_client = None
+            self._collection = None
+            return
         try:
             import chromadb
             self._chroma_client = chromadb.Client()
