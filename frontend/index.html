@@ -7,159 +7,289 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=IBM+Plex+Serif:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #0a0a0f;
-      --surface: #111118;
-      --surface2: #18181f;
-      --surface3: #1f1f28;
-      --border: #2a2a38;
-      --border-bright: #3d3d52;
-      --text: #e8e8f0;
-      --text-muted: #8080a0;
-      --text-dim: #5a5a78;
-      --accent: #7c6dfa;
-      --accent-bright: #9d91ff;
-      --accent-glow: rgba(124, 109, 250, 0.15);
-      --critical: #ff4d4d;
-      --critical-bg: rgba(255, 77, 77, 0.1);
-      --high: #ff8c42;
-      --high-bg: rgba(255, 140, 66, 0.1);
-      --medium: #ffd166;
-      --medium-bg: rgba(255, 209, 102, 0.1);
-      --low: #06d6a0;
-      --low-bg: rgba(6, 214, 160, 0.1);
-      --none: #4a4a60;
-      --none-bg: rgba(74, 74, 96, 0.1);
-      --mono: 'Space Mono', monospace;
-      --sans: 'DM Sans', sans-serif;
+      --bg:          #F7F6F2;
+      --surface:     #FFFFFF;
+      --surface-2:   #F0EEE8;
+      --surface-3:   #E8E5DC;
+      --border:      #D4D0C4;
+      --border-dark: #B8B4A4;
+      --text-pri:    #1A1915;
+      --text-sec:    #4A4840;
+      --text-ter:    #7A7868;
+      --text-inv:    #FFFFFF;
+      --ink:         #1A1915;
+      --rule:        #C8C4B4;
+
+      /* Semantic */
+      --critical:    #B91C1C;
+      --critical-bg: #FEF2F2;
+      --critical-br: #FECACA;
+      --high:        #C2410C;
+      --high-bg:     #FFF7ED;
+      --high-br:     #FED7AA;
+      --medium:      #A16207;
+      --medium-bg:   #FEFCE8;
+      --medium-br:   #FDE68A;
+      --low:         #166534;
+      --low-bg:      #F0FDF4;
+      --low-br:      #BBF7D0;
+      --none:        #374151;
+      --none-bg:     #F9FAFB;
+      --none-br:     #E5E7EB;
+      --info:        #1D4ED8;
+      --info-bg:     #EFF6FF;
+      --info-br:     #BFDBFE;
+
+      --mono: 'IBM Plex Mono', monospace;
+      --sans: 'IBM Plex Sans', sans-serif;
+      --serif: 'IBM Plex Serif', serif;
+      --radius: 2px;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
       background: var(--bg);
-      color: var(--text);
+      color: var(--text-pri);
       font-family: var(--sans);
-      font-size: 14px;
+      font-size: 13px;
       line-height: 1.6;
       min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
     }
 
-    #root { min-height: 100vh; }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border-dark); }
 
-    /* Scrollbar */
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: var(--surface); }
-    ::-webkit-scrollbar-thumb { background: var(--border-bright); border-radius: 3px; }
+    /* ── Typography ── */
+    .mono { font-family: var(--mono); }
+    .serif { font-family: var(--serif); }
+    .label-xs {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-ter);
+    }
 
-    /* Typography */
-    h1, h2, h3, h4 { font-weight: 600; letter-spacing: -0.02em; }
-    code, .mono { font-family: var(--mono); font-size: 0.85em; }
-
-    /* Layout */
-    .app-header {
+    /* ── Header ── */
+    .site-header {
+      background: var(--surface);
       border-bottom: 1px solid var(--border);
-      padding: 16px 32px;
+      padding: 0 40px;
+      height: 52px;
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 0;
       position: sticky;
       top: 0;
-      background: rgba(10, 10, 15, 0.95);
-      backdrop-filter: blur(12px);
       z-index: 100;
     }
 
-    .logo-mark {
-      width: 32px; height: 32px;
-      background: linear-gradient(135deg, var(--accent), #c084fc);
-      border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
+    .header-wordmark {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      border-right: 1px solid var(--border);
+      padding-right: 20px;
+      margin-right: 20px;
+    }
+
+    .wordmark-primary {
       font-family: var(--mono);
-      font-weight: 700;
-      font-size: 14px;
-      color: white;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: var(--ink);
+    }
+
+    .wordmark-divider {
+      width: 1px;
+      height: 12px;
+      background: var(--border-dark);
+    }
+
+    .wordmark-secondary {
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--text-ter);
+      letter-spacing: 0.03em;
+    }
+
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .header-nav-item {
+      font-size: 12px;
+      color: var(--text-ter);
+      font-family: var(--mono);
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: color 0.15s;
+      text-decoration: none;
+    }
+
+    .header-nav-item:hover { color: var(--ink); }
+    .header-nav-item.active { color: var(--ink); font-weight: 500; }
+
+    .header-right {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .status-cluster {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .status-pill {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      color: var(--text-ter);
+      padding: 3px 8px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+    }
+
+    .status-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+    }
+
+    /* ── Main Layout ── */
+    .main {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 40px 40px 80px;
+    }
+
+    /* ── Page Title ── */
+    .page-head {
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 20px;
+      margin-bottom: 32px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+
+    .page-title {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+    }
+
+    .page-subtitle {
+      font-size: 12px;
+      color: var(--text-ter);
+      margin-top: 4px;
+      font-family: var(--sans);
+      font-weight: 300;
+    }
+
+    .page-doc-ref {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--text-ter);
+      letter-spacing: 0.06em;
+    }
+
+    /* ── Section Headers (formal document style) ── */
+    .section-rule {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      margin-top: 32px;
+    }
+
+    .section-number {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--text-ter);
+      letter-spacing: 0.1em;
       flex-shrink: 0;
     }
 
-    .logo-text {
-      font-family: var(--mono);
-      font-size: 16px;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      color: var(--text);
-    }
-
-    .logo-sub {
+    .section-title-text {
+      font-family: var(--sans);
       font-size: 11px;
-      color: var(--text-dim);
-      margin-left: 4px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-sec);
+      flex-shrink: 0;
+    }
+
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: var(--rule);
+    }
+
+    .section-count {
       font-family: var(--mono);
+      font-size: 10px;
+      color: var(--text-ter);
+      flex-shrink: 0;
     }
 
-    .health-badge {
-      margin-left: auto;
-      display: flex;
-      gap: 8px;
-      align-items: center;
+    /* ── Upload / Intake Panel ── */
+    .intake-grid {
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-bottom: 32px;
     }
 
-    .badge-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      display: inline-block;
-    }
-
-    .health-item {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 11px;
-      color: var(--text-muted);
-      font-family: var(--mono);
-    }
-
-    .main-content {
-      max-width: 1280px;
-      margin: 0 auto;
+    .intake-main {
+      background: var(--surface);
       padding: 32px;
     }
 
-    /* Upload Panel */
-    .upload-panel {
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      background: var(--surface);
-      overflow: hidden;
-      margin-bottom: 24px;
-    }
-
-    .upload-inner {
-      padding: 48px;
+    .intake-sidebar {
+      background: var(--surface-2);
+      padding: 24px;
       display: flex;
       flex-direction: column;
-      align-items: center;
       gap: 20px;
     }
 
     .drop-zone {
-      width: 100%;
-      max-width: 520px;
-      border: 2px dashed var(--border-bright);
-      border-radius: 10px;
-      padding: 40px;
+      border: 1px dashed var(--border-dark);
+      background: var(--bg);
+      padding: 36px 24px;
       text-align: center;
       cursor: pointer;
-      transition: all 0.2s;
-      background: var(--surface2);
       position: relative;
+      transition: background 0.15s, border-color 0.15s;
     }
 
     .drop-zone:hover, .drop-zone.drag-over {
-      border-color: var(--accent);
-      background: var(--accent-glow);
+      background: var(--surface-2);
+      border-color: var(--ink);
     }
 
     .drop-zone input[type="file"] {
@@ -171,446 +301,714 @@
       height: 100%;
     }
 
-    .drop-icon {
-      font-size: 36px;
-      margin-bottom: 12px;
-      display: block;
+    .drop-icon-wrap {
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--border-dark);
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 14px;
     }
 
-    .drop-label {
-      font-size: 15px;
+    .drop-icon-wrap svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--text-sec);
+      fill: none;
+      stroke-width: 1.5;
+    }
+
+    .drop-primary {
+      font-family: var(--sans);
+      font-size: 13px;
       font-weight: 500;
-      color: var(--text);
-      margin-bottom: 6px;
+      color: var(--text-pri);
+      margin-bottom: 4px;
     }
 
-    .drop-sub {
-      font-size: 12px;
-      color: var(--text-muted);
+    .drop-secondary {
       font-family: var(--mono);
+      font-size: 10px;
+      color: var(--text-ter);
+      letter-spacing: 0.06em;
     }
 
-    .selected-file {
+    .file-selected {
       display: flex;
       align-items: center;
       gap: 10px;
-      background: var(--accent-glow);
-      border: 1px solid var(--accent);
-      border-radius: 8px;
-      padding: 10px 16px;
-      font-family: var(--mono);
-      font-size: 12px;
-      color: var(--accent-bright);
-      max-width: 520px;
-      width: 100%;
-    }
-
-    .btn-analyze {
-      background: linear-gradient(135deg, var(--accent), #9d60f8);
-      color: white;
-      border: none;
-      border-radius: 8px;
-      padding: 12px 32px;
-      font-size: 14px;
-      font-weight: 600;
-      font-family: var(--sans);
-      cursor: pointer;
-      transition: all 0.2s;
-      letter-spacing: 0.01em;
-    }
-
-    .btn-analyze:hover:not(:disabled) {
-      transform: translateY(-1px);
-      box-shadow: 0 8px 24px rgba(124, 109, 250, 0.35);
-    }
-
-    .btn-analyze:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-
-    /* Status Bar */
-    .status-bar {
       border: 1px solid var(--border);
-      border-radius: 10px;
-      background: var(--surface);
-      padding: 16px 20px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 24px;
-      font-family: var(--mono);
-      font-size: 13px;
+      background: var(--info-bg);
+      padding: 10px 14px;
+      margin-top: 12px;
     }
 
-    .spinner {
-      width: 16px; height: 16px;
-      border: 2px solid var(--border-bright);
-      border-top-color: var(--accent);
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
+    .file-selected svg {
+      width: 16px;
+      height: 16px;
+      stroke: var(--info);
+      fill: none;
+      stroke-width: 1.5;
       flex-shrink: 0;
     }
 
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    .status-ok { color: var(--low); }
-    .status-err { color: var(--critical); }
-    .status-proc { color: var(--accent-bright); }
-
-    /* Risk Dashboard */
-    .section-title {
+    .file-name {
+      font-family: var(--mono);
       font-size: 11px;
-      font-family: var(--mono);
-      color: var(--text-dim);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 16px;
+      color: var(--info);
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
-    .dashboard-grid {
-      display: grid;
-      grid-template-columns: 220px 1fr 1fr;
-      gap: 16px;
-      margin-bottom: 24px;
-    }
-
-    .panel {
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      background: var(--surface);
-      padding: 20px;
-    }
-
-    /* Gauge */
-    .gauge-wrap {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .gauge-svg { width: 160px; height: 90px; overflow: visible; }
-
-    .gauge-score {
-      font-family: var(--mono);
-      font-size: 28px;
-      font-weight: 700;
-      text-align: center;
-    }
-
-    .gauge-label {
-      font-size: 11px;
-      color: var(--text-muted);
-      text-align: center;
-      font-family: var(--mono);
-      letter-spacing: 0.08em;
-    }
-
-    /* Risk bar chart */
-    .risk-bars {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      justify-content: center;
-    }
-
-    .risk-bar-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .risk-bar-label {
-      width: 64px;
+    .file-size {
       font-family: var(--mono);
       font-size: 10px;
-      color: var(--text-muted);
-      text-align: right;
+      color: var(--text-ter);
     }
 
-    .risk-bar-track {
-      flex: 1;
-      height: 8px;
-      background: var(--surface3);
-      border-radius: 4px;
+    /* ── Settings in Sidebar ── */
+    .setting-group { display: flex; flex-direction: column; gap: 10px; }
+
+    .setting-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-ter);
+      margin-bottom: 4px;
+    }
+
+    .setting-select {
+      width: 100%;
+      padding: 6px 10px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-pri);
+      appearance: none;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .setting-select:focus { border-color: var(--ink); }
+
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .toggle-label {
+      font-size: 12px;
+      color: var(--text-sec);
+      font-family: var(--sans);
+    }
+
+    .toggle {
+      position: relative;
+      width: 28px;
+      height: 15px;
+      flex-shrink: 0;
+    }
+
+    .toggle input { opacity: 0; width: 0; height: 0; position: absolute; }
+
+    .toggle-track {
+      position: absolute;
+      inset: 0;
+      background: var(--border-dark);
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .toggle input:checked + .toggle-track { background: var(--ink); }
+
+    .toggle-track::after {
+      content: '';
+      position: absolute;
+      width: 11px;
+      height: 11px;
+      left: 2px;
+      top: 2px;
+      background: white;
+      transition: transform 0.15s;
+    }
+
+    .toggle input:checked + .toggle-track::after { transform: translateX(13px); }
+
+    /* ── Button ── */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 24px;
+      background: var(--ink);
+      color: var(--text-inv);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid var(--ink);
+      cursor: pointer;
+      transition: background 0.15s;
+      margin-top: 16px;
+    }
+
+    .btn-primary:hover:not(:disabled) { background: #2d2c26; }
+    .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: var(--surface);
+      color: var(--text-sec);
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .btn-secondary:hover { border-color: var(--border-dark); color: var(--text-pri); }
+
+    /* ── Status Bar ── */
+    .status-bar {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+      font-family: var(--mono);
+      font-size: 11px;
+    }
+
+    .spinner {
+      width: 14px;
+      height: 14px;
+      border: 1.5px solid var(--border);
+      border-top-color: var(--ink);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      flex-shrink: 0;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Progress Steps ── */
+    .progress-steps {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin-bottom: 24px;
+      border: 1px solid var(--border);
+      background: var(--surface);
       overflow: hidden;
     }
 
-    .risk-bar-fill {
-      height: 100%;
-      border-radius: 4px;
-      transition: width 0.6s ease;
+    .progress-step {
+      flex: 1;
+      padding: 10px 12px;
+      border-right: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
-    .risk-bar-count {
-      width: 24px;
+    .progress-step:last-child { border-right: none; }
+
+    .step-num {
       font-family: var(--mono);
-      font-size: 11px;
-      font-weight: 700;
-      text-align: left;
+      font-size: 10px;
+      color: var(--text-ter);
+      width: 16px;
+      height: 16px;
+      border: 1px solid var(--border-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
     }
 
-    /* Meta panel */
-    .meta-rows { display: flex; flex-direction: column; gap: 10px; }
+    .step-num.active {
+      background: var(--ink);
+      color: white;
+      border-color: var(--ink);
+    }
 
-    .meta-row {
+    .step-num.done {
+      background: var(--low);
+      color: white;
+      border-color: var(--low);
+    }
+
+    .step-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--text-ter);
+      letter-spacing: 0.06em;
+    }
+
+    .step-label.active { color: var(--ink); font-weight: 500; }
+
+    /* ── Dashboard Grid ── */
+    .kpi-row {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-bottom: 1px;
+    }
+
+    .kpi-cell {
+      background: var(--surface);
+      padding: 16px 20px;
+    }
+
+    .kpi-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-ter);
+      margin-bottom: 8px;
+    }
+
+    .kpi-value {
+      font-family: var(--mono);
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1;
+    }
+
+    .kpi-sub {
+      font-size: 11px;
+      color: var(--text-ter);
+      margin-top: 4px;
+    }
+
+    /* ── Risk Score Display ── */
+    .risk-score-panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      margin-bottom: 1px;
+    }
+
+    .score-number-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      flex-shrink: 0;
+    }
+
+    .score-number {
+      font-family: var(--mono);
+      font-size: 56px;
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+
+    .score-denom {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--text-ter);
+      margin-top: 4px;
+    }
+
+    .score-bar-wrap { flex: 1; }
+
+    .score-bar-track {
+      height: 6px;
+      background: var(--surface-3);
+      position: relative;
+      margin-bottom: 6px;
+    }
+
+    .score-bar-segments {
+      position: absolute;
+      inset: 0;
+      display: flex;
+    }
+
+    .score-bar-seg {
+      height: 100%;
+    }
+
+    .score-bar-fill {
+      position: absolute;
+      top: -3px;
+      width: 2px;
+      height: 12px;
+      background: var(--ink);
+      transition: left 0.5s ease;
+    }
+
+    .score-bar-labels {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      padding-bottom: 10px;
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--text-ter);
+      letter-spacing: 0.06em;
+    }
+
+    .score-verdict {
+      font-family: var(--serif);
+      font-size: 14px;
+      color: var(--text-sec);
+      margin-top: 12px;
+      font-weight: 300;
+      font-style: italic;
+    }
+
+    /* ── Distribution Table ── */
+    .dist-panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-top: none;
+      overflow: hidden;
+      margin-bottom: 32px;
+    }
+
+    .dist-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .dist-table th {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-ter);
+      font-weight: 500;
+      text-align: left;
+      padding: 10px 16px;
+      background: var(--surface-2);
       border-bottom: 1px solid var(--border);
     }
 
-    .meta-row:last-child { border-bottom: none; padding-bottom: 0; }
-
-    .meta-key {
-      font-size: 11px;
-      color: var(--text-muted);
+    .dist-table td {
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--border);
       font-family: var(--mono);
+      font-size: 12px;
     }
 
-    .meta-val {
-      font-size: 13px;
+    .dist-table tr:last-child td { border-bottom: none; }
+
+    .dist-bar-cell { width: 40%; }
+
+    .dist-bar-track {
+      height: 4px;
+      background: var(--surface-3);
+    }
+
+    .dist-bar-fill {
+      height: 100%;
+      transition: width 0.4s ease;
+    }
+
+    /* ── Risk Badge ── */
+    .risk-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-family: var(--mono);
+      font-size: 10px;
       font-weight: 500;
-      color: var(--text);
-      font-family: var(--mono);
+      letter-spacing: 0.08em;
+      padding: 2px 7px;
+      border: 1px solid;
     }
 
-    /* Clause Cards */
-    .clause-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; }
+    .risk-tag.CRITICAL { color: var(--critical); background: var(--critical-bg); border-color: var(--critical-br); }
+    .risk-tag.HIGH     { color: var(--high);     background: var(--high-bg);     border-color: var(--high-br); }
+    .risk-tag.MEDIUM   { color: var(--medium);   background: var(--medium-bg);   border-color: var(--medium-br); }
+    .risk-tag.LOW      { color: var(--low);      background: var(--low-bg);      border-color: var(--low-br); }
+    .risk-tag.NONE     { color: var(--none);     background: var(--none-bg);     border-color: var(--none-br); }
 
-    .clause-card {
+    /* ── Clause Cards ── */
+    .clause-table {
       border: 1px solid var(--border);
-      border-radius: 10px;
       background: var(--surface);
-      padding: 16px 20px;
-      transition: border-color 0.2s;
+      margin-bottom: 32px;
     }
 
-    .clause-card:hover { border-color: var(--border-bright); }
+    .clause-row {
+      border-bottom: 1px solid var(--border);
+      padding: 16px 20px;
+      transition: background 0.1s;
+    }
 
-    .clause-card-header {
+    .clause-row:last-child { border-bottom: none; }
+    .clause-row:hover { background: var(--surface-2); }
+
+    .clause-row-header {
       display: flex;
       align-items: center;
       gap: 10px;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       flex-wrap: wrap;
     }
 
     .clause-id {
       font-family: var(--mono);
-      font-size: 11px;
-      color: var(--text-dim);
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 2px 6px;
+      font-size: 10px;
+      color: var(--text-ter);
+      letter-spacing: 0.06em;
     }
 
-    .risk-badge {
+    .clause-label {
       font-family: var(--mono);
       font-size: 10px;
-      font-weight: 700;
       letter-spacing: 0.06em;
-      padding: 2px 8px;
-      border-radius: 4px;
-      text-transform: uppercase;
+      color: var(--info);
+      background: var(--info-bg);
+      border: 1px solid var(--info-br);
+      padding: 1px 7px;
     }
 
-    .badge-CRITICAL { background: var(--critical-bg); color: var(--critical); border: 1px solid var(--critical); }
-    .badge-HIGH     { background: var(--high-bg);     color: var(--high);     border: 1px solid var(--high); }
-    .badge-MEDIUM   { background: var(--medium-bg);   color: var(--medium);   border: 1px solid var(--medium); }
-    .badge-LOW      { background: var(--low-bg);      color: var(--low);      border: 1px solid var(--low); }
-    .badge-NONE     { background: var(--none-bg);     color: var(--none);     border: 1px solid var(--none); }
-
-    .clause-label-tag {
-      font-size: 11px;
-      color: var(--accent-bright);
-      background: var(--accent-glow);
-      border: 1px solid var(--accent);
-      border-radius: 4px;
-      padding: 2px 8px;
+    .clause-conf {
       font-family: var(--mono);
+      font-size: 10px;
+      color: var(--text-ter);
+      margin-left: auto;
     }
 
     .clause-reason {
       font-size: 13px;
-      color: var(--text);
+      color: var(--text-pri);
+      line-height: 1.6;
       margin-bottom: 8px;
-      line-height: 1.5;
     }
 
-    .clause-negotiation {
+    .clause-negotiate {
+      border-left: 2px solid var(--border-dark);
+      padding: 6px 12px;
       font-size: 12px;
-      color: var(--text-muted);
-      background: var(--surface2);
-      border-left: 3px solid var(--accent);
-      padding: 8px 12px;
-      border-radius: 0 6px 6px 0;
-      margin-top: 8px;
+      color: var(--text-sec);
+      font-style: italic;
+      font-family: var(--serif);
+      background: var(--surface-2);
+      margin-top: 6px;
     }
 
-    .clause-percentile {
-      font-size: 11px;
-      color: var(--medium);
+    .clause-negotiate strong {
+      font-style: normal;
       font-family: var(--mono);
-      margin-top: 8px;
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      color: var(--text-ter);
+      font-weight: 500;
     }
 
-    /* Contradictions */
-    .contra-card {
+    /* ── Contradictions ── */
+    .contra-table {
       border: 1px solid var(--border);
-      border-radius: 10px;
       background: var(--surface);
-      padding: 16px 20px;
-      margin-bottom: 10px;
+      margin-bottom: 32px;
     }
+
+    .contra-row {
+      border-bottom: 1px solid var(--border);
+      padding: 16px 20px;
+    }
+
+    .contra-row:last-child { border-bottom: none; }
 
     .contra-header {
       display: flex;
       align-items: center;
       gap: 10px;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .contra-type {
+      font-family: var(--sans);
       font-size: 13px;
-      font-weight: 600;
-      color: var(--text);
+      font-weight: 500;
+      color: var(--text-pri);
     }
 
     .contra-desc {
       font-size: 12px;
-      color: var(--text-muted);
+      color: var(--text-sec);
       margin-bottom: 10px;
     }
 
-    .contra-clauses {
+    .contra-pair {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-
-    .contra-clause {
-      background: var(--surface2);
+      gap: 1px;
+      background: var(--border);
       border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 10px 12px;
-      font-size: 11px;
+    }
+
+    .contra-clause-block {
+      background: var(--surface-2);
+      padding: 10px 14px;
+    }
+
+    .contra-clause-ref {
       font-family: var(--mono);
-      color: var(--text-muted);
-      line-height: 1.5;
+      font-size: 10px;
+      color: var(--text-ter);
+      letter-spacing: 0.06em;
+      margin-bottom: 5px;
     }
 
-    .contra-clause-id {
-      font-weight: 700;
-      color: var(--text-dim);
-      margin-bottom: 4px;
+    .contra-clause-text {
+      font-size: 11px;
+      color: var(--text-sec);
+      line-height: 1.6;
     }
 
-    /* Missing clauses */
-    .missing-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      margin-bottom: 24px;
+    /* ── Missing Clauses ── */
+    .missing-table {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      margin-bottom: 32px;
     }
 
-    .missing-item {
+    .missing-row {
       display: flex;
       align-items: flex-start;
-      gap: 10px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 12px 16px;
+      gap: 14px;
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--border);
       font-size: 13px;
-      color: var(--text-muted);
+      color: var(--text-sec);
     }
 
-    .missing-icon {
-      color: var(--medium);
-      font-size: 14px;
+    .missing-row:last-child { border-bottom: none; }
+
+    .missing-index {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--text-ter);
       flex-shrink: 0;
-      margin-top: 1px;
+      margin-top: 2px;
+      letter-spacing: 0.06em;
     }
 
-    /* Summary */
-    .summary-box {
-      border: 1px solid var(--border);
-      border-radius: 10px;
+    /* ── Summary ── */
+    .summary-block {
       background: var(--surface);
-      padding: 24px;
-      margin-bottom: 24px;
+      border: 1px solid var(--border);
+      padding: 28px 32px;
+      margin-bottom: 32px;
+    }
+
+    .summary-text {
+      font-family: var(--serif);
       font-size: 14px;
-      line-height: 1.8;
-      color: var(--text);
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--text-pri);
       white-space: pre-wrap;
     }
 
-    /* Export Button */
-    .btn-export {
-      background: var(--surface2);
-      color: var(--text);
-      border: 1px solid var(--border-bright);
-      border-radius: 8px;
-      padding: 10px 24px;
-      font-size: 13px;
+    /* ── Tabs ── */
+    .tab-bar {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-bottom: none;
+    }
+
+    .tab {
+      padding: 10px 20px;
       font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-ter);
       cursor: pointer;
-      transition: all 0.2s;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
+      border-right: 1px solid var(--border);
+      border-bottom: 2px solid transparent;
+      transition: all 0.1s;
     }
 
-    .btn-export:hover {
-      border-color: var(--accent);
-      color: var(--accent-bright);
-    }
+    .tab:hover { color: var(--text-pri); }
+    .tab.active { color: var(--ink); border-bottom-color: var(--ink); background: var(--bg); }
 
-    /* Section header row */
-    .section-header {
+    /* ── Footer ── */
+    .report-footer {
+      border-top: 1px solid var(--rule);
+      padding-top: 20px;
+      margin-top: 40px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 16px;
     }
 
-    .count-tag {
+    .footer-meta {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--text-ter);
+      letter-spacing: 0.06em;
+    }
+
+    .footer-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    /* ── Empty ── */
+    .empty-row {
+      padding: 24px 20px;
       font-family: var(--mono);
       font-size: 11px;
-      color: var(--text-dim);
-      background: var(--surface2);
+      color: var(--text-ter);
+      letter-spacing: 0.04em;
       border: 1px solid var(--border);
-      border-radius: 100px;
-      padding: 2px 10px;
-    }
-
-    .empty-state {
-      text-align: center;
-      padding: 32px;
-      color: var(--text-dim);
-      font-family: var(--mono);
-      font-size: 13px;
-      border: 1px solid var(--border);
-      border-radius: 10px;
       background: var(--surface);
-      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 32px;
     }
 
-    .divider {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 32px 0;
+    .empty-check {
+      width: 14px;
+      height: 14px;
+      border: 1px solid var(--low);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--low);
+      font-size: 9px;
     }
 
-    @media (max-width: 900px) {
-      .dashboard-grid { grid-template-columns: 1fr; }
-      .contra-clauses { grid-template-columns: 1fr; }
-      .main-content { padding: 16px; }
-      .upload-inner { padding: 24px; }
+    /* ── Responsive ── */
+    @media (max-width: 860px) {
+      .intake-grid { grid-template-columns: 1fr; }
+      .kpi-row { grid-template-columns: repeat(3, 1fr); }
+      .contra-pair { grid-template-columns: 1fr; }
+      .main { padding: 20px; }
+      .site-header { padding: 0 20px; }
+      .score-number { font-size: 40px; }
     }
   </style>
 </head>
@@ -618,62 +1016,42 @@
 <div id="root"></div>
 
 <script type="text/babel">
-const { useState, useEffect, useRef, useCallback } = React;
-  const API_BASE = 'https://lexagent-api.onrender.com';
+const { useState, useEffect, useRef } = React;
+const API_BASE = 'https://lexagent-api.onrender.com';
 
-// ── Helpers ──────────────────────────────────────────────────────────
-const riskColor = {
-  CRITICAL: 'var(--critical)', HIGH: 'var(--high)',
-  MEDIUM: 'var(--medium)', LOW: 'var(--low)', NONE: 'var(--none)',
+const RISK_ORDER = ['CRITICAL','HIGH','MEDIUM','LOW','NONE'];
+const RISK_COLORS = {
+  CRITICAL: '#B91C1C', HIGH: '#C2410C', MEDIUM: '#A16207', LOW: '#166534', NONE: '#374151'
+};
+const RISK_BAR_COLORS = {
+  CRITICAL: '#FCA5A5', HIGH: '#FDBA74', MEDIUM: '#FDE68A', LOW: '#BBF7D0', NONE: '#E5E7EB'
 };
 
-const riskOrder = ['CRITICAL', 'HIGH', 'MEDIUM', 'LOW', 'NONE'];
+const AGENTS = ['Extraction','Segmentation','Classification','Risk Scoring','Contradiction Detection','Summarization'];
 
-function RiskBadge({ level }) {
-  return <span className={`risk-badge badge-${level}`}>{level}</span>;
+function RiskTag({ level }) {
+  return <span className={`risk-tag ${level}`}>{level}</span>;
 }
 
-// ── Gauge Component ───────────────────────────────────────────────────
-function RiskGauge({ score }) {
-  const pct = Math.max(0, Math.min(1, score));
-  const color = pct >= 0.75 ? 'var(--critical)' : pct >= 0.5 ? 'var(--high)' : pct >= 0.25 ? 'var(--medium)' : 'var(--low)';
-  const angle = pct * 180 - 90; // -90 to 90 degrees
-  const rad = (angle * Math.PI) / 180;
-  const r = 70, cx = 80, cy = 80;
-  const needleX = cx + r * Math.cos(rad);
-  const needleY = cy + r * Math.sin(rad);
-
+function SectionHeader({ num, title, count }) {
   return (
-    <div className="gauge-wrap">
-      <svg className="gauge-svg" viewBox="0 0 160 90">
-        {/* Background arc */}
-        <path d="M 10 80 A 70 70 0 0 1 150 80" fill="none" stroke="var(--surface3)" strokeWidth="10" strokeLinecap="round"/>
-        {/* Colored segments */}
-        {[[0,0.25,'var(--low)'],[0.25,0.5,'var(--medium)'],[0.5,0.75,'var(--high)'],[0.75,1,'var(--critical)']].map(([s, e, c]) => {
-          const startAngle = s * Math.PI - Math.PI;
-          const endAngle = e * Math.PI - Math.PI;
-          const x1 = cx + r * Math.cos(startAngle), y1 = cy + r * Math.sin(startAngle);
-          const x2 = cx + r * Math.cos(endAngle), y2 = cy + r * Math.sin(endAngle);
-          return <path key={c} d={`M ${x1} ${y1} A ${r} ${r} 0 0 1 ${x2} ${y2}`} fill="none" stroke={c} strokeWidth="10" strokeLinecap="butt" opacity="0.5"/>;
-        })}
-        {/* Needle */}
-        <line x1={cx} y1={cy} x2={needleX} y2={needleY} stroke={color} strokeWidth="2.5" strokeLinecap="round"/>
-        <circle cx={cx} cy={cy} r="5" fill={color}/>
-      </svg>
-      <div className="gauge-score" style={{ color }}>{(pct * 100).toFixed(0)}%</div>
-      <div className="gauge-label">OVERALL RISK</div>
+    <div className="section-rule">
+      <span className="section-number">{num}</span>
+      <span className="section-title-text">{title}</span>
+      <div className="section-line" />
+      {count !== undefined && <span className="section-count">{count} item{count !== 1 ? 's' : ''}</span>}
     </div>
   );
 }
 
-// ── Health Badge ──────────────────────────────────────────────────────
-function HealthBadge({ health }) {
+function HealthIndicator({ health }) {
   if (!health) return null;
+  const items = [['OLLAMA', health.ollama], ['CHROMADB', health.chromadb], ['GPU', health.gpu]];
   return (
-    <div className="health-badge">
-      {[['OLLAMA', health.ollama], ['CHROMA', health.chromadb], ['GPU', health.gpu]].map(([label, ok]) => (
-        <div key={label} className="health-item">
-          <span className="badge-dot" style={{ background: ok ? 'var(--low)' : 'var(--critical)' }}/>
+    <div className="status-cluster">
+      {items.map(([label, ok]) => (
+        <div key={label} className="status-pill">
+          <span className="status-dot" style={{ background: ok ? '#166534' : '#B91C1C' }} />
           {label}
         </div>
       ))}
@@ -681,31 +1059,91 @@ function HealthBadge({ health }) {
   );
 }
 
-// ── Main App ─────────────────────────────────────────────────────────
-function App() {
-  const [file, setFile] = useState(null);
-  const [dragging, setDragging] = useState(false);
-  const [jobId, setJobId] = useState(null);
-  const [status, setStatus] = useState('idle'); // idle | processing | complete | error
-  const [report, setReport] = useState(null);
-  const [errorMsg, setErrorMsg] = useState('');
-  const [health, setHealth] = useState(null);
-  const pollRef = useRef(null);
+function ScoreBar({ score }) {
+  const pct = Math.max(0, Math.min(1, score)) * 100;
+  const color = pct >= 75 ? '#B91C1C' : pct >= 50 ? '#C2410C' : pct >= 25 ? '#A16207' : '#166534';
+  const verdict = pct >= 75
+    ? 'This contract presents substantial legal exposure. Independent counsel is strongly advised prior to execution.'
+    : pct >= 50
+    ? 'Moderate risk detected. Key clauses require negotiation before execution.'
+    : pct >= 25
+    ? 'Low to moderate risk. Review flagged items and confirm standard protections are present.'
+    : 'Risk profile is within acceptable parameters. Standard review recommended.';
+  return (
+    <div className="score-bar-wrap">
+      <div className="score-bar-track">
+        <div className="score-bar-segments">
+          {[['#BBF7D0',25],['#FDE68A',25],['#FDBA74',25],['#FCA5A5',25]].map(([c,w],i) => (
+            <div key={i} className="score-bar-seg" style={{ width: `${w}%`, background: c }} />
+          ))}
+        </div>
+        <div className="score-bar-fill" style={{ left: `calc(${pct}% - 1px)` }} />
+      </div>
+      <div className="score-bar-labels">
+        <span>LOW RISK</span>
+        <span>MEDIUM</span>
+        <span>HIGH</span>
+        <span>CRITICAL</span>
+      </div>
+      <div className="score-verdict" style={{ color }}>{verdict}</div>
+    </div>
+  );
+}
 
-  // Fetch health on mount
+function ProcessingSteps({ activeIdx }) {
+  return (
+    <div className="progress-steps">
+      {AGENTS.map((a, i) => (
+        <div key={a} className="progress-step">
+          <div className={`step-num ${i < activeIdx ? 'done' : i === activeIdx ? 'active' : ''}`}>
+            {i < activeIdx ? '✓' : i + 1}
+          </div>
+          <span className={`step-label ${i === activeIdx ? 'active' : ''}`}>{a}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function App() {
+  const [file, setFile]           = useState(null);
+  const [dragging, setDragging]   = useState(false);
+  const [jobId, setJobId]         = useState(null);
+  const [status, setStatus]       = useState('idle');
+  const [report, setReport]       = useState(null);
+  const [errorMsg, setErrorMsg]   = useState('');
+  const [health, setHealth]       = useState(null);
+  const [activeStep, setActiveStep] = useState(0);
+  const [activeTab, setActiveTab] = useState('risk');
+  const [settings, setSettings]   = useState({ jurisdiction: 'IN', mode: 'standard', comparative: true, negotiate: true });
+  const pollRef = useRef(null);
+  const stepRef = useRef(null);
+
   useEffect(() => {
-    fetch('https://lexagent-api.onrender.com/health').then(r => r.json()).then(setHealth).catch(() => {});
+    fetch(`${API_BASE}/health`).then(r => r.json()).then(setHealth).catch(() => {});
   }, []);
 
-  // Poll for job completion
+  useEffect(() => {
+    if (status === 'processing') {
+      setActiveStep(0);
+      stepRef.current = setInterval(() => {
+        setActiveStep(s => s < AGENTS.length - 1 ? s + 1 : s);
+      }, 12000);
+    } else {
+      clearInterval(stepRef.current);
+    }
+    return () => clearInterval(stepRef.current);
+  }, [status]);
+
   useEffect(() => {
     if (status === 'processing' && jobId) {
       pollRef.current = setInterval(async () => {
         try {
-          const res = await fetch(`https://lexagent-api.onrender.com/status/${jobId}`);
+          const res = await fetch(`${API_BASE}/status/${jobId}`);
           const data = await res.json();
           if (data.status === 'complete') {
             clearInterval(pollRef.current);
+            setActiveStep(AGENTS.length);
             setStatus('complete');
             setReport(data.result);
           } else if (data.status === 'error') {
@@ -713,294 +1151,361 @@ function App() {
             setStatus('error');
             setErrorMsg(data.error || 'Analysis failed.');
           }
-        } catch (e) {
+        } catch {
           clearInterval(pollRef.current);
           setStatus('error');
-          setErrorMsg('Lost connection to server.');
+          setErrorMsg('Lost connection to analysis server.');
         }
       }, 2000);
     }
     return () => clearInterval(pollRef.current);
   }, [status, jobId]);
 
-  const handleFileChange = (e) => {
-    const f = e.target.files?.[0];
-    if (f) setFile(f);
-  };
-
-  const handleDrop = (e) => {
-    e.preventDefault();
-    setDragging(false);
-    const f = e.dataTransfer.files?.[0];
-    if (f) setFile(f);
-  };
+  const handleFile = (f) => { if (f) setFile(f); };
+  const handleDrop = (e) => { e.preventDefault(); setDragging(false); handleFile(e.dataTransfer.files?.[0]); };
 
   const handleAnalyze = async () => {
     if (!file) return;
-    setStatus('processing');
-    setReport(null);
-    setErrorMsg('');
-
+    setStatus('processing'); setReport(null); setErrorMsg('');
     const form = new FormData();
     form.append('file', file);
-
     try {
-      const res = await fetch('https://lexagent-api.onrender.com/analyze', { method: 'POST', body: form });
-      if (!res.ok) {
-        const err = await res.json();
-        throw new Error(err.detail || 'Upload failed.');
-      }
+      const res = await fetch(`${API_BASE}/analyze`, { method: 'POST', body: form });
+      if (!res.ok) { const e = await res.json(); throw new Error(e.detail || 'Upload failed.'); }
       const data = await res.json();
       setJobId(data.job_id);
-    } catch (e) {
-      setStatus('error');
-      setErrorMsg(e.message);
-    }
+    } catch (e) { setStatus('error'); setErrorMsg(e.message); }
   };
 
-  const handleExport = () => {
+  const handleExportJSON = () => {
     if (!report) return;
     const blob = new Blob([JSON.stringify(report, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `lexagent_${report.contract_id?.slice(0,8)}.json`;
-    a.click();
+    const a = document.createElement('a'); a.href = url;
+    a.download = `lexagent_report_${report.contract_id?.slice(0,8) || 'export'}.json`; a.click();
     URL.revokeObjectURL(url);
   };
 
-  const totalClauses = report?.total_clauses || 0;
+  const handleExportCSV = () => {
+    if (!report?.critical_clauses?.length) return;
+    const rows = [['Clause ID','Risk Level','Label','Confidence','Reason'].join(',')];
+    report.critical_clauses.forEach(c => {
+      rows.push([c.clause_id, c.risk_level, c.label, c.label_score?.toFixed(2) || '', `"${(c.risk_reason || '').replace(/"/g,'""')}"`].join(','));
+    });
+    const blob = new Blob([rows.join('\n')], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href = url;
+    a.download = `lexagent_clauses_${report.contract_id?.slice(0,8) || 'export'}.csv`; a.click();
+    URL.revokeObjectURL(url);
+  };
+
   const maxCount = report ? Math.max(...Object.values(report.risk_distribution || {}), 1) : 1;
+  const score = report?.overall_risk_score || 0;
+  const scorePct = Math.round(score * 100);
+
+  const tabs = [
+    { id: 'risk',    label: 'Risk Clauses',    count: report?.critical_clauses?.length },
+    { id: 'contra',  label: 'Contradictions',  count: report?.contradictions?.length },
+    { id: 'missing', label: 'Missing Clauses', count: report?.missing_clauses?.length },
+    { id: 'summary', label: 'Summary',         count: null },
+  ];
 
   return (
     <div>
       {/* Header */}
-      <div className="app-header">
-        <div className="logo-mark">Lx</div>
-        <div>
-          <span className="logo-text">LEXAGENT</span>
-          <span className="logo-sub">/ contract intelligence</span>
+      <header className="site-header">
+        <div className="header-wordmark">
+          <span className="wordmark-primary">LEXAGENT</span>
+          <div className="wordmark-divider" />
+          <span className="wordmark-secondary">Contract Intelligence Platform</span>
         </div>
-        <HealthBadge health={health} />
-      </div>
+        <nav className="header-nav">
+          <span className="header-nav-item active">Analysis</span>
+          <span className="header-nav-item">History</span>
+          <span className="header-nav-item">Clauses</span>
+          <span className="header-nav-item">Settings</span>
+        </nav>
+        <div className="header-right">
+          <HealthIndicator health={health} />
+        </div>
+      </header>
 
-      <div className="main-content">
+      <div className="main">
 
-        {/* Upload Panel */}
-        <div className="upload-panel">
-          <div className="upload-inner">
+        {/* Page Head */}
+        <div className="page-head">
+          <div>
+            <div className="page-title">Contract Analysis</div>
+            <div className="page-subtitle">Upload a contract document to generate a structured risk assessment report.</div>
+          </div>
+          <span className="page-doc-ref">REF: LEX-ANALYSIS-001</span>
+        </div>
+
+        {/* Section 1 — Document Intake */}
+        <SectionHeader num="§ 1" title="Document Intake" />
+
+        <div className="intake-grid">
+          <div className="intake-main">
             <div
               className={`drop-zone ${dragging ? 'drag-over' : ''}`}
-              onDragOver={(e) => { e.preventDefault(); setDragging(true); }}
+              onDragOver={e => { e.preventDefault(); setDragging(true); }}
               onDragLeave={() => setDragging(false)}
               onDrop={handleDrop}
             >
-              <span className="drop-icon">⬆</span>
-              <div className="drop-label">Drop contract here or click to browse</div>
-              <div className="drop-sub">PDF · DOCX · Max 20 MB</div>
-              <input type="file" accept=".pdf,.docx,.doc" onChange={handleFileChange} />
+              <input type="file" accept=".pdf,.docx,.doc" onChange={e => handleFile(e.target.files?.[0])} />
+              <div className="drop-icon-wrap">
+                <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              </div>
+              <div className="drop-primary">Upload contract document</div>
+              <div className="drop-secondary">PDF · DOCX · Maximum 20 MB</div>
             </div>
 
             {file && (
-              <div className="selected-file">
-                <span>📄</span>
-                <span>{file.name}</span>
-                <span style={{ marginLeft: 'auto', color: 'var(--text-dim)' }}>
-                  {(file.size / 1024).toFixed(1)} KB
-                </span>
+              <div className="file-selected">
+                <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                <span className="file-name">{file.name}</span>
+                <span className="file-size">{(file.size / 1024).toFixed(1)} KB</span>
               </div>
             )}
 
             <button
-              className="btn-analyze"
+              className="btn-primary"
               onClick={handleAnalyze}
               disabled={!file || status === 'processing'}
             >
-              {status === 'processing' ? 'Analyzing…' : 'Analyze Contract'}
+              {status === 'processing' ? '↻  Processing...' : '→  Run Analysis'}
             </button>
+          </div>
+
+          <div className="intake-sidebar">
+            <div className="setting-group">
+              <div className="setting-label">Jurisdiction</div>
+              <select className="setting-select" value={settings.jurisdiction}
+                onChange={e => setSettings(s => ({ ...s, jurisdiction: e.target.value }))}>
+                <option value="IN">India (IN)</option>
+                <option value="US">United States (US)</option>
+                <option value="UK">United Kingdom (UK)</option>
+                <option value="SG">Singapore (SG)</option>
+              </select>
+            </div>
+
+            <div className="setting-group">
+              <div className="setting-label">Analysis Mode</div>
+              <select className="setting-select" value={settings.mode}
+                onChange={e => setSettings(s => ({ ...s, mode: e.target.value }))}>
+                <option value="standard">Standard</option>
+                <option value="deep">Deep (2× tokens)</option>
+                <option value="quick">Quick Scan</option>
+              </select>
+            </div>
+
+            <div className="setting-group">
+              <div className="setting-label">Options</div>
+              {[
+                ['comparative', 'Comparative Scoring'],
+                ['negotiate', 'Negotiation Points'],
+              ].map(([key, label]) => (
+                <div key={key} className="toggle-row">
+                  <span className="toggle-label">{label}</span>
+                  <label className="toggle">
+                    <input type="checkbox" checked={settings[key]}
+                      onChange={() => setSettings(s => ({ ...s, [key]: !s[key] }))} />
+                    <span className="toggle-track" />
+                  </label>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* Status Bar */}
-        {status === 'processing' && (
+        {/* Processing */}
+        {status === 'processing' && (<>
+          <ProcessingSteps activeIdx={activeStep} />
           <div className="status-bar">
             <div className="spinner" />
-            <span className="status-proc mono">Running 6-agent pipeline… This may take 60–120 seconds on first run (model loading).</span>
+            <span style={{ color: 'var(--text-sec)' }}>
+              AGENT {activeStep + 1}/{AGENTS.length} — {AGENTS[Math.min(activeStep, AGENTS.length - 1)].toUpperCase()} · First run may take 60–120 seconds while models load.
+            </span>
           </div>
-        )}
+        </>)}
+
         {status === 'error' && (
-          <div className="status-bar">
-            <span style={{ color: 'var(--critical)' }}>✕</span>
-            <span className="status-err mono">{errorMsg}</span>
+          <div className="status-bar" style={{ borderColor: 'var(--critical-br)', background: 'var(--critical-bg)' }}>
+            <span style={{ color: 'var(--critical)', fontFamily: 'var(--mono)', fontSize: 11 }}>ERROR — {errorMsg}</span>
           </div>
         )}
 
-        {/* ── Report ─────────────────────────────────────────────────── */}
+        {/* ── Report ── */}
         {status === 'complete' && report && (<>
 
-          {/* Risk Dashboard */}
-          <div className="section-title">Risk Dashboard</div>
-          <div className="dashboard-grid">
-            {/* Gauge */}
-            <div className="panel">
-              <RiskGauge score={report.overall_risk_score} />
-            </div>
+          {/* Section 2 — Executive Summary */}
+          <SectionHeader num="§ 2" title="Executive Risk Assessment" />
 
-            {/* Distribution bars */}
-            <div className="panel">
-              <div className="section-title">Distribution</div>
-              <div className="risk-bars">
-                {riskOrder.map(level => {
+          <div className="risk-score-panel">
+            <div className="score-number-wrap">
+              <div className="score-number" style={{
+                color: scorePct >= 75 ? 'var(--critical)' : scorePct >= 50 ? 'var(--high)' : scorePct >= 25 ? 'var(--medium)' : 'var(--low)'
+              }}>{scorePct}</div>
+              <div className="score-denom">/ 100 RISK INDEX</div>
+            </div>
+            <ScoreBar score={score} />
+          </div>
+
+          <div className="kpi-row">
+            {[
+              ['Document Type', report.document_type, ''],
+              ['Total Pages', report.pages, ''],
+              ['Clauses Extracted', report.total_clauses, ''],
+              ['Critical / High', (report.risk_distribution?.CRITICAL || 0) + ' / ' + (report.risk_distribution?.HIGH || 0), ''],
+              ['Extraction Method', report.extraction_method, ''],
+            ].map(([label, val]) => (
+              <div key={label} className="kpi-cell">
+                <div className="kpi-label">{label}</div>
+                <div className="kpi-value" style={{ fontSize: String(val).length > 8 ? 14 : 22 }}>{val}</div>
+              </div>
+            ))}
+          </div>
+
+          <div className="dist-panel">
+            <table className="dist-table">
+              <thead>
+                <tr>
+                  <th>Risk Level</th>
+                  <th>Count</th>
+                  <th className="dist-bar-cell">Distribution</th>
+                  <th>% of Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                {RISK_ORDER.map(level => {
                   const count = report.risk_distribution?.[level] || 0;
+                  const pct = report.total_clauses ? ((count / report.total_clauses) * 100).toFixed(1) : '0.0';
                   return (
-                    <div key={level} className="risk-bar-row">
-                      <div className="risk-bar-label">{level}</div>
-                      <div className="risk-bar-track">
-                        <div
-                          className="risk-bar-fill"
-                          style={{
+                    <tr key={level}>
+                      <td><RiskTag level={level} /></td>
+                      <td style={{ color: RISK_COLORS[level], fontWeight: 600 }}>{count}</td>
+                      <td>
+                        <div className="dist-bar-track">
+                          <div className="dist-bar-fill" style={{
                             width: `${(count / maxCount) * 100}%`,
-                            background: riskColor[level],
-                          }}
-                        />
-                      </div>
-                      <div className="risk-bar-count" style={{ color: riskColor[level] }}>{count}</div>
-                    </div>
+                            background: RISK_BAR_COLORS[level]
+                          }} />
+                        </div>
+                      </td>
+                      <td style={{ color: 'var(--text-ter)' }}>{pct}%</td>
+                    </tr>
                   );
                 })}
-              </div>
-            </div>
-
-            {/* Meta */}
-            <div className="panel">
-              <div className="section-title">Document Info</div>
-              <div className="meta-rows">
-                <div className="meta-row">
-                  <span className="meta-key">TYPE</span>
-                  <span className="meta-val">{report.document_type}</span>
-                </div>
-                <div className="meta-row">
-                  <span className="meta-key">PAGES</span>
-                  <span className="meta-val">{report.pages}</span>
-                </div>
-                <div className="meta-row">
-                  <span className="meta-key">CLAUSES</span>
-                  <span className="meta-val">{report.total_clauses}</span>
-                </div>
-                <div className="meta-row">
-                  <span className="meta-key">METHOD</span>
-                  <span className="meta-val">{report.extraction_method}</span>
-                </div>
-                <div className="meta-row">
-                  <span className="meta-key">ID</span>
-                  <span className="meta-val">{report.contract_id?.slice(0,8)}…</span>
-                </div>
-              </div>
-            </div>
+              </tbody>
+            </table>
           </div>
 
-          <hr className="divider" />
+          {/* Section 3 — Findings */}
+          <SectionHeader num="§ 3" title="Detailed Findings" />
 
-          {/* Critical / High Clauses */}
-          <div className="section-header">
-            <div className="section-title" style={{ marginBottom: 0 }}>Critical &amp; High Risk Clauses</div>
-            <span className="count-tag">{report.critical_clauses?.length || 0}</span>
+          <div className="tab-bar">
+            {tabs.map(t => (
+              <div key={t.id} className={`tab ${activeTab === t.id ? 'active' : ''}`}
+                onClick={() => setActiveTab(t.id)}>
+                {t.label}{t.count !== null && t.count !== undefined ? ` (${t.count})` : ''}
+              </div>
+            ))}
           </div>
 
-          {(!report.critical_clauses || report.critical_clauses.length === 0) ? (
-            <div className="empty-state">✓ No critical or high-risk clauses detected.</div>
-          ) : (
-            <div className="clause-list">
-              {report.critical_clauses.map((c, i) => (
-                <div key={i} className="clause-card">
-                  <div className="clause-card-header">
-                    <span className="clause-id">{c.clause_id}</span>
-                    <RiskBadge level={c.risk_level} />
-                    <span className="clause-label-tag">{c.label}</span>
-                    {c.label_score != null && (
-                      <span style={{ marginLeft: 'auto', fontSize: 11, fontFamily: 'var(--mono)', color: 'var(--text-dim)' }}>
-                        conf {(c.label_score * 100).toFixed(0)}%
-                      </span>
-                    )}
-                  </div>
-                  <div className="clause-reason">{c.risk_reason}</div>
-                  {c.negotiation_point && (
-                    <div className="clause-negotiation">
-                      <strong style={{ color: 'var(--accent-bright)' }}>Negotiate: </strong>
-                      {c.negotiation_point}
+          {/* Tab: Risk Clauses */}
+          {activeTab === 'risk' && (
+            (!report.critical_clauses?.length)
+              ? <div className="empty-row"><div className="empty-check">✓</div>No critical or high-risk clauses identified.</div>
+              : <div className="clause-table">
+                  {report.critical_clauses.map((c, i) => (
+                    <div key={i} className="clause-row">
+                      <div className="clause-row-header">
+                        <span className="clause-id">{c.clause_id}</span>
+                        <RiskTag level={c.risk_level} />
+                        <span className="clause-label">{c.label}</span>
+                        {c.label_score != null && (
+                          <span className="clause-conf">CONF {(c.label_score * 100).toFixed(0)}%</span>
+                        )}
+                      </div>
+                      <div className="clause-reason">{c.risk_reason}</div>
+                      {c.negotiation_point && (
+                        <div className="clause-negotiate">
+                          <strong>RECOMMENDED ACTION — </strong>
+                          {c.negotiation_point}
+                        </div>
+                      )}
+                      {report.comparative_scores?.[c.clause_id]?.verdict && (
+                        <div style={{ marginTop: 6, fontFamily: 'var(--mono)', fontSize: 10, color: 'var(--medium)' }}>
+                          BENCHMARK — {report.comparative_scores[c.clause_id].verdict}
+                        </div>
+                      )}
                     </div>
-                  )}
-                  {report.comparative_scores?.[c.clause_id]?.verdict && (
-                    <div className="clause-percentile">
-                      ⚡ {report.comparative_scores[c.clause_id].verdict}
-                    </div>
-                  )}
+                  ))}
                 </div>
-              ))}
+          )}
+
+          {/* Tab: Contradictions */}
+          {activeTab === 'contra' && (
+            (!report.contradictions?.length)
+              ? <div className="empty-row"><div className="empty-check">✓</div>No contradictions detected between clauses.</div>
+              : <div className="contra-table">
+                  {report.contradictions.map((c, i) => (
+                    <div key={i} className="contra-row">
+                      <div className="contra-header">
+                        <RiskTag level={c.severity} />
+                        <span className="contra-type">{c.contradiction_type}</span>
+                      </div>
+                      <div className="contra-desc">{c.description}</div>
+                      <div className="contra-pair">
+                        <div className="contra-clause-block">
+                          <div className="contra-clause-ref">CLAUSE {c.clause_a_id}</div>
+                          <div className="contra-clause-text">{c.clause_a_text}</div>
+                        </div>
+                        <div className="contra-clause-block">
+                          <div className="contra-clause-ref">CLAUSE {c.clause_b_id}</div>
+                          <div className="contra-clause-text">{c.clause_b_text}</div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+          )}
+
+          {/* Tab: Missing */}
+          {activeTab === 'missing' && (
+            (!report.missing_clauses?.length)
+              ? <div className="empty-row"><div className="empty-check">✓</div>All standard protective clauses are present.</div>
+              : <div className="missing-table">
+                  {report.missing_clauses.map((m, i) => (
+                    <div key={i} className="missing-row">
+                      <span className="missing-index">{String(i + 1).padStart(2, '0')}.</span>
+                      <span>{m}</span>
+                    </div>
+                  ))}
+                </div>
+          )}
+
+          {/* Tab: Summary */}
+          {activeTab === 'summary' && (
+            <div className="summary-block">
+              <div className="summary-text">{report.plain_english_summary || 'Summary not available.'}</div>
             </div>
           )}
 
-          <hr className="divider" />
-
-          {/* Contradictions */}
-          <div className="section-header">
-            <div className="section-title" style={{ marginBottom: 0 }}>Contradictions Detected</div>
-            <span className="count-tag">{report.contradictions?.length || 0}</span>
-          </div>
-
-          {(!report.contradictions || report.contradictions.length === 0) ? (
-            <div className="empty-state">✓ No contradictions detected between clauses.</div>
-          ) : report.contradictions.map((c, i) => (
-            <div key={i} className="contra-card">
-              <div className="contra-header">
-                <RiskBadge level={c.severity} />
-                <span className="contra-type">{c.contradiction_type}</span>
-              </div>
-              <div className="contra-desc">{c.description}</div>
-              <div className="contra-clauses">
-                <div className="contra-clause">
-                  <div className="contra-clause-id">§ {c.clause_a_id}</div>
-                  {c.clause_a_text}
-                </div>
-                <div className="contra-clause">
-                  <div className="contra-clause-id">§ {c.clause_b_id}</div>
-                  {c.clause_b_text}
-                </div>
+          {/* Footer */}
+          <div className="report-footer">
+            <div>
+              <div className="footer-meta">CONTRACT ID — {report.contract_id}</div>
+              <div className="footer-meta" style={{ marginTop: 4 }}>
+                GENERATED — {new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'long', year: 'numeric' }).toUpperCase()}
               </div>
             </div>
-          ))}
-
-          <hr className="divider" />
-
-          {/* Missing Clauses */}
-          <div className="section-header">
-            <div className="section-title" style={{ marginBottom: 0 }}>Missing Protections</div>
-            <span className="count-tag">{report.missing_clauses?.length || 0}</span>
-          </div>
-
-          {(!report.missing_clauses || report.missing_clauses.length === 0) ? (
-            <div className="empty-state">✓ All key protective clauses appear to be present.</div>
-          ) : (
-            <div className="missing-list">
-              {report.missing_clauses.map((m, i) => (
-                <div key={i} className="missing-item">
-                  <span className="missing-icon">⚠</span>
-                  <span>{m}</span>
-                </div>
-              ))}
+            <div className="footer-actions">
+              <button className="btn-secondary" onClick={handleExportCSV}>↓ Export CSV</button>
+              <button className="btn-secondary" onClick={handleExportJSON}>↓ Export JSON</button>
+              <button className="btn-secondary" onClick={() => window.print()}>⎙ Print Report</button>
             </div>
-          )}
-
-          <hr className="divider" />
-
-          {/* Plain English Summary */}
-          <div className="section-title">Plain English Summary</div>
-          <div className="summary-box">{report.plain_english_summary || 'Summary not available.'}</div>
-
-          {/* Export */}
-          <button className="btn-export" onClick={handleExport}>
-            ↓ Export Full JSON Report
-          </button>
+          </div>
 
         </>)}
       </div>
