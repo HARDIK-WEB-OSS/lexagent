@@ -11,7 +11,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, Optional
 
-from fastapi import FastAPI, File, HTTPException, UploadFile, BackgroundTasks
+from fastapi import FastAPI, File, Form, HTTPException, UploadFile, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
@@ -28,7 +28,7 @@ UPLOADS_DIR = BASE_DIR / "uploads"
 FRONTEND_DIR = BASE_DIR / "frontend"
 UPLOADS_DIR.mkdir(exist_ok=True)
 
-MAX_FILE_SIZE_BYTES = 20 * 1024 * 1024  # 20 MB
+MAX_FILE_SIZE_BYTES = 50 * 1024 * 1024  # 20 MB
 ALLOWED_EXTENSIONS = {".pdf", ".docx", ".doc"}
 MAX_HISTORY = 20
 
@@ -77,7 +77,13 @@ async def serve_frontend():
 
 
 @app.post("/analyze")
-async def analyze_contract(file: UploadFile = File(...)):
+async def analyze_contract(
+    file: UploadFile = File(...),
+    jurisdiction: str = Form("IN"),
+    mode: str = Form("standard"),
+    comparative: str = Form("true"),
+    negotiate: str = Form("true"),
+):
     """
     Accept PDF or DOCX file upload, start async analysis, return job_id.
     """
@@ -104,12 +110,19 @@ async def analyze_contract(file: UploadFile = File(...)):
     save_path.write_bytes(content)
 
     # Register job
+    settings = {
+        "jurisdiction": jurisdiction,
+        "mode": mode,
+        "comparative": comparative.lower() == "true",
+        "negotiate": negotiate.lower() == "true",
+    }
     jobs[job_id] = {
         "status": "processing",
         "result": None,
         "error": None,
         "file_name": file.filename,
         "created_at": datetime.now(timezone.utc).isoformat(),
+        "settings": settings,
     }
 
     # Run pipeline in thread pool (blocking ops: model inference, file I/O)
@@ -119,17 +132,18 @@ async def analyze_contract(file: UploadFile = File(...)):
         _run_pipeline_sync,
         job_id,
         str(save_path),
+        settings,
     )
 
     logger.info(f"Job {job_id} started for file: {file.filename}")
     return {"job_id": job_id, "status": "processing"}
 
 
-def _run_pipeline_sync(job_id: str, file_path: str):
+def _run_pipeline_sync(job_id: str, file_path: str, settings: dict = None):
     """Synchronous wrapper for pipeline execution."""
     try:
         pipeline = get_pipeline()
-        result = pipeline.run(file_path)
+        result = pipeline.run(file_path, settings=settings or {})
         jobs[job_id]["status"] = "complete"
         jobs[job_id]["result"] = result
         logger.info(f"Job {job_id} completed successfully.")

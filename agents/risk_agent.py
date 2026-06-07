@@ -59,7 +59,7 @@ FOREIGN_JURISDICTIONS = [
 class RiskAgent:
     """Deterministic rule-based risk scoring for legal clauses."""
 
-    def score(self, classified_clauses: List[Dict]) -> Tuple[List[Dict], List[str]]:
+    def score(self, classified_clauses: List[Dict], jurisdiction: str = "IN") -> Tuple[List[Dict], List[str]]:
         """
         Returns (scored_clauses, missing_clauses_list).
         """
@@ -107,6 +107,8 @@ class RiskAgent:
         self, label: str, text: str
     ) -> Tuple[str, float, str, str]:
         """Dispatch to specific rule set based on clause label."""
+        self._jurisdiction = jurisdiction
+        self._jurisdiction = jurisdiction
         dispatch = {
             "Non-Compete": self._score_non_compete,
             "IP Assignment": self._score_ip_assignment,
@@ -402,40 +404,39 @@ class RiskAgent:
 
     def _score_governing_law(self, text: str) -> Tuple[str, float, str, str]:
         text_lower = text.lower()
-        is_foreign = any(j in text_lower for j in FOREIGN_JURISDICTIONS)
-        is_arbitration_abroad = (
-            "arbitration" in text_lower
-            and any(j in text_lower for j in FOREIGN_JURISDICTIONS)
-        )
+        jurisdiction = getattr(self, '_jurisdiction', 'IN')
+
+        # Build list of "foreign" jurisdictions relative to user's selected jurisdiction
+        home_terms = {
+            "IN": ["india", "indian"],
+            "US": ["united states", "usa", "u.s.a", "new york", "delaware", "california"],
+            "UK": ["england", "wales", "united kingdom", "uk", "u.k"],
+            "SG": ["singapore"],
+        }
+        home = home_terms.get(jurisdiction, home_terms["IN"])
+        is_home = any(t in text_lower for t in home)
+        is_foreign = any(j in text_lower for j in FOREIGN_JURISDICTIONS) and not is_home
+        is_arbitration_abroad = "arbitration" in text_lower and is_foreign
 
         if is_arbitration_abroad:
-            foreign_j = next(j for j in FOREIGN_JURISDICTIONS if j in text_lower)
+            foreign_j = next((j for j in FOREIGN_JURISDICTIONS if j in text_lower and j not in home), "foreign jurisdiction")
             return (
                 "HIGH",
                 RISK_SCORES["HIGH"],
-                f"Arbitration seat is in a foreign jurisdiction ({foreign_j}), "
-                "making dispute resolution expensive and impractical.",
-                "Negotiate arbitration seat to India (preferably Delhi or Mumbai). "
-                "SIAC or ICC arbitration in India is acceptable.",
+                f"Arbitration seat is in a foreign jurisdiction ({foreign_j}), making dispute resolution expensive and impractical.",
+                f"Negotiate arbitration seat to {jurisdiction} home jurisdiction.",
             )
 
         if is_foreign:
-            foreign_j = next(j for j in FOREIGN_JURISDICTIONS if j in text_lower)
+            foreign_j = next((j for j in FOREIGN_JURISDICTIONS if j in text_lower and j not in home), "foreign jurisdiction")
             return (
                 "MEDIUM",
                 RISK_SCORES["MEDIUM"],
-                f"Governing law is a foreign jurisdiction ({foreign_j}). "
-                "Indian courts may not have easy jurisdiction.",
-                "Negotiate governing law to India. If foreign law is required, "
-                "ensure Indian courts have concurrent jurisdiction.",
+                f"Governing law is a foreign jurisdiction ({foreign_j}).",
+                f"Negotiate governing law to {jurisdiction} jurisdiction.",
             )
 
-        return (
-            "NONE",
-            RISK_SCORES["NONE"],
-            "Governing law appears to be Indian jurisdiction.",
-            "",
-        )
+        return ("NONE", RISK_SCORES["NONE"], "Governing law matches selected jurisdiction.", "")
 
     # ------------------------------------------------------------------
     # Missing clause detection

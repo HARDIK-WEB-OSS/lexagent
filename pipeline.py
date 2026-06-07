@@ -33,7 +33,12 @@ class Pipeline:
         self.summarizer_agent = SummarizerAgent()
         logger.info("Pipeline ready.")
 
-    def run(self, file_path: str) -> dict:
+    def run(self, file_path: str, settings: dict = None) -> dict:
+        settings = settings or {}
+        jurisdiction = settings.get("jurisdiction", "IN")
+        comparative = settings.get("comparative", True)
+        negotiate = settings.get("negotiate", True)
+
         contract_id = str(uuid.uuid4())
         start_time = datetime.now(timezone.utc)
 
@@ -57,7 +62,7 @@ class Pipeline:
 
         # ── Agent 4: Risk Scoring ────────────────────────────────────────
         logger.info(f"[{contract_id}] Agent 4: Risk Scoring")
-        scored_clauses, missing_clauses = self.risk_agent.score(classified_clauses)
+        scored_clauses, missing_clauses = self.risk_agent.score(classified_clauses, jurisdiction=jurisdiction)
 
         # Compute overall risk score
         if scored_clauses:
@@ -115,7 +120,7 @@ class Pipeline:
 
         # Comparative aggressiveness for HIGH/CRITICAL clauses
         comparative_scores = {}
-        for clause in critical_clauses[:10]:  # Cap at 10 to avoid slowness
+        for clause in critical_clauses[:10] if comparative else []:  # Skipped if comparative=False
             label = clause.get("label", "Other")
             text = clause.get("clause_text", "")
             cid = clause.get("clause_id")
@@ -123,6 +128,17 @@ class Pipeline:
             comparative_scores[cid] = comp
 
         final_report["comparative_scores"] = comparative_scores
+
+        # Strip negotiation points if user toggled off
+        if not negotiate:
+            for c in final_report.get("all_clauses", []):
+                c["negotiation_point"] = ""
+            for c in final_report.get("critical_clauses", []):
+                c["negotiation_point"] = ""
+            final_report["negotiation_points"] = []
+
+        # Attach settings to report for UI reference
+        final_report["analysis_settings"] = settings
 
         elapsed = (datetime.now(timezone.utc) - start_time).total_seconds()
         logger.info(
