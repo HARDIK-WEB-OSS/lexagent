@@ -108,7 +108,6 @@ class RiskAgent:
     ) -> Tuple[str, float, str, str]:
         """Dispatch to specific rule set based on clause label."""
         self._jurisdiction = jurisdiction
-        self._jurisdiction = jurisdiction
         dispatch = {
             "Non-Compete": self._score_non_compete,
             "IP Assignment": self._score_ip_assignment,
