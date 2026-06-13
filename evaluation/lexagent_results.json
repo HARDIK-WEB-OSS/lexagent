@@ -4,7 +4,7 @@
     "true_label": "Non-Compete",
     "true_risk": "HIGH",
     "pred_label": "Non-Compete",
-    "pred_label_score": 0.3,
+    "pred_label_score": 0.4374,
     "pred_risk": "HIGH",
     "pred_risk_score": 0.75
   },
@@ -13,7 +13,7 @@
     "true_label": "Non-Compete",
     "true_risk": "HIGH",
     "pred_label": "Non-Compete",
-    "pred_label_score": 0.3,
+    "pred_label_score": 0.4507,
     "pred_risk": "HIGH",
     "pred_risk_score": 0.75
   },
@@ -22,7 +22,7 @@
     "true_label": "Non-Compete",
     "true_risk": "LOW",
     "pred_label": "Non-Compete",
-    "pred_label_score": 0.3,
+    "pred_label_score": 0.4306,
     "pred_risk": "MEDIUM",
     "pred_risk_score": 0.5
   },
@@ -30,26 +30,26 @@
     "id": "nc_004",
     "true_label": "Non-Compete",
     "true_risk": "HIGH",
-    "pred_label": "Termination",
-    "pred_label_score": 0.3,
-    "pred_risk": "LOW",
-    "pred_risk_score": 0.25
+    "pred_label": "Non-Compete",
+    "pred_label_score": 0.441,
+    "pred_risk": "HIGH",
+    "pred_risk_score": 0.75
   },
   {
     "id": "nc_005",
     "true_label": "Non-Compete",
     "true_risk": "LOW",
-    "pred_label": "Other",
-    "pred_label_score": 0.1,
-    "pred_risk": "NONE",
-    "pred_risk_score": 0.0
+    "pred_label": "Non-Compete",
+    "pred_label_score": 0.4462,
+    "pred_risk": "LOW",
+    "pred_risk_score": 0.25
   },
   {
     "id": "ip_001",
     "true_label": "IP Assignment",
     "true_risk": "CRITICAL",
     "pred_label": "IP Assignment",
-    "pred_label_score": 0.45714285714285713,
+    "pred_label_score": 0.3923,
     "pred_risk": "CRITICAL",
     "pred_risk_score": 1.0
   },
@@ -58,7 +58,7 @@
     "true_label": "IP Assignment",
     "true_risk": "HIGH",
     "pred_label": "IP Assignment",
-    "pred_label_score": 0.37142857142857144,
+    "pred_label_score": 0.3786,
     "pred_risk": "MEDIUM",
     "pred_risk_score": 0.5
   },
@@ -66,17 +66,17 @@
     "id": "ip_003",
     "true_label": "IP Assignment",
     "true_risk": "MEDIUM",
-    "pred_label": "Assignment",
-    "pred_label_score": 0.5,
-    "pred_risk": "LOW",
-    "pred_risk_score": 0.25
+    "pred_label": "IP Assignment",
+    "pred_label_score": 0.3709,
+    "pred_risk": "MEDIUM",
+    "pred_risk_score": 0.5
   },
   {
     "id": "ip_004",
     "true_label": "IP Assignment",
     "true_risk": "CRITICAL",
     "pred_label": "IP Assignment",
-    "pred_label_score": 0.37142857142857144,
+    "pred_label_score": 0.3644,
     "pred_risk": "CRITICAL",
     "pred_risk_score": 1.0
   },
@@ -85,7 +85,7 @@
     "true_label": "IP Assignment",
     "true_risk": "MEDIUM",
     "pred_label": "IP Assignment",
-    "pred_label_score": 0.37142857142857144,
+    "pred_label_score": 0.3681,
     "pred_risk": "MEDIUM",
     "pred_risk_score": 0.5
   },
@@ -93,8 +93,8 @@
     "id": "term_001",
     "true_label": "Termination",
     "true_risk": "HIGH",
-    "pred_label": "Notice Period",
-    "pred_label_score": 0.35,
+    "pred_label": "Termination",
+    "pred_label_score": 0.3061,
     "pred_risk": "HIGH",
     "pred_risk_score": 0.75
   },
@@ -102,8 +102,8 @@
     "id": "term_002",
     "true_label": "Termination",
     "true_risk": "LOW",
-    "pred_label": "Notice Period",
-    "pred_label_score": 0.35,
+    "pred_label": "Termination",
+    "pred_label_score": 0.2893,
     "pred_risk": "LOW",
     "pred_risk_score": 0.25
   },
@@ -112,7 +112,7 @@
     "true_label": "Termination",
     "true_risk": "HIGH",
     "pred_label": "Termination",
-    "pred_label_score": 0.3,
+    "pred_label_score": 0.2819,
     "pred_risk": "HIGH",
     "pred_risk_score": 0.75
   },
@@ -120,8 +120,8 @@
     "id": "term_004",
     "true_label": "Termination",
     "true_risk": "HIGH",
-    "pred_label": "Notice Period",
-    "pred_label_score": 0.35,
+    "pred_label": "Termination",
+    "pred_label_score": 0.3078,
     "pred_risk": "HIGH",
     "pred_risk_score": 0.75
   },
@@ -129,17 +129,17 @@
     "id": "term_005",
     "true_label": "Termination",
     "true_risk": "LOW",
-    "pred_label": "Renewal/Expiration",
-    "pred_label_score": 0.32,
-    "pred_risk": "NONE",
-    "pred_risk_score": 0.0
+    "pred_label": "Termination",
+    "pred_label_score": 0.246,
+    "pred_risk": "LOW",
+    "pred_risk_score": 0.25
   },
   {
     "id": "conf_001",
     "true_label": "Confidentiality/NDA",
     "true_risk": "HIGH",
     "pred_label": "Confidentiality/NDA",
-    "pred_label_score": 0.4,
+    "pred_label_score": 0.3268,
     "pred_risk": "HIGH",
     "pred_risk_score": 0.75
   },
@@ -148,7 +148,7 @@
     "true_label": "Confidentiality/NDA",
     "true_risk": "HIGH",
     "pred_label": "Confidentiality/NDA",
-    "pred_label_score": 0.3,
+    "pred_label_score": 0.366,
     "pred_risk": "HIGH",
     "pred_risk_score": 0.75
   },
@@ -157,7 +157,7 @@
     "true_label": "Confidentiality/NDA",
     "true_risk": "LOW",
     "pred_label": "Confidentiality/NDA",
-    "pred_label_score": 0.5,
+    "pred_label_score": 0.3593,
     "pred_risk": "LOW",
     "pred_risk_score": 0.25
   },
@@ -166,7 +166,7 @@
     "true_label": "Confidentiality/NDA",
     "true_risk": "HIGH",
     "pred_label": "Confidentiality/NDA",
-    "pred_label_score": 0.4,
+    "pred_label_score": 0.328,
     "pred_risk": "HIGH",
     "pred_risk_score": 0.75
   },
@@ -175,7 +175,7 @@
     "true_label": "Confidentiality/NDA",
     "true_risk": "LOW",
     "pred_label": "Confidentiality/NDA",
-    "pred_label_score": 0.3,
+    "pred_label_score": 0.3457,
     "pred_risk": "LOW",
     "pred_risk_score": 0.25
   },
@@ -184,7 +184,7 @@
     "true_label": "Liability Limitation",
     "true_risk": "HIGH",
     "pred_label": "Liability Limitation",
-    "pred_label_score": 0.4,
+    "pred_label_score": 0.3828,
     "pred_risk": "HIGH",
     "pred_risk_score": 0.75
   },
@@ -192,17 +192,17 @@
     "id": "liab_002",
     "true_label": "Liability Limitation",
     "true_risk": "MEDIUM",
-    "pred_label": "Payment Terms",
-    "pred_label_score": 0.26666666666666666,
-    "pred_risk": "LOW",
-    "pred_risk_score": 0.25
+    "pred_label": "Liability Limitation",
+    "pred_label_score": 0.3766,
+    "pred_risk": "HIGH",
+    "pred_risk_score": 0.75
   },
   {
     "id": "liab_003",
     "true_label": "Liability Limitation",
     "true_risk": "LOW",
-    "pred_label": "Payment Terms",
-    "pred_label_score": 0.26666666666666666,
+    "pred_label": "Liability Limitation",
+    "pred_label_score": 0.3996,
     "pred_risk": "LOW",
     "pred_risk_score": 0.25
   },
@@ -210,26 +210,26 @@
     "id": "liab_004",
     "true_label": "Liability Limitation",
     "true_risk": "HIGH",
-    "pred_label": "Other",
-    "pred_label_score": 0.1,
-    "pred_risk": "NONE",
-    "pred_risk_score": 0.0
+    "pred_label": "Liability Limitation",
+    "pred_label_score": 0.3873,
+    "pred_risk": "MEDIUM",
+    "pred_risk_score": 0.5
   },
   {
     "id": "liab_005",
     "true_label": "Liability Limitation",
     "true_risk": "MEDIUM",
-    "pred_label": "Other",
-    "pred_label_score": 0.1,
-    "pred_risk": "NONE",
-    "pred_risk_score": 0.0
+    "pred_label": "Liability Limitation",
+    "pred_label_score": 0.3943,
+    "pred_risk": "MEDIUM",
+    "pred_risk_score": 0.5
   },
   {
     "id": "gov_001",
     "true_label": "Governing Law",
     "true_risk": "HIGH",
     "pred_label": "Governing Law",
-    "pred_label_score": 0.5,
+    "pred_label_score": 0.4075,
     "pred_risk": "HIGH",
     "pred_risk_score": 0.75
   },
@@ -238,7 +238,7 @@
     "true_label": "Governing Law",
     "true_risk": "NONE",
     "pred_label": "Governing Law",
-    "pred_label_score": 0.5,
+    "pred_label_score": 0.4495,
     "pred_risk": "NONE",
     "pred_risk_score": 0.0
   },
@@ -246,8 +246,8 @@
     "id": "gov_003",
     "true_label": "Governing Law",
     "true_risk": "MEDIUM",
-    "pred_label": "Dispute Resolution",
-    "pred_label_score": 0.45714285714285713,
+    "pred_label": "Governing Law",
+    "pred_label_score": 0.4018,
     "pred_risk": "HIGH",
     "pred_risk_score": 0.75
   },
@@ -255,8 +255,8 @@
     "id": "gov_004",
     "true_label": "Governing Law",
     "true_risk": "MEDIUM",
-    "pred_label": "Jurisdiction",
-    "pred_label_score": 0.6,
+    "pred_label": "Governing Law",
+    "pred_label_score": 0.4274,
     "pred_risk": "MEDIUM",
     "pred_risk_score": 0.5
   },
@@ -265,7 +265,7 @@
     "true_label": "Governing Law",
     "true_risk": "NONE",
     "pred_label": "Governing Law",
-    "pred_label_score": 0.5,
+    "pred_label_score": 0.4287,
     "pred_risk": "NONE",
     "pred_risk_score": 0.0
   },
@@ -274,7 +274,7 @@
     "true_label": "Indemnification",
     "true_risk": "MEDIUM",
     "pred_label": "Indemnification",
-    "pred_label_score": 0.5,
+    "pred_label_score": 0.2585,
     "pred_risk": "HIGH",
     "pred_risk_score": 0.75
   },
@@ -283,7 +283,7 @@
     "true_label": "Indemnification",
     "true_risk": "LOW",
     "pred_label": "Indemnification",
-    "pred_label_score": 0.35,
+    "pred_label_score": 0.2473,
     "pred_risk": "LOW",
     "pred_risk_score": 0.25
   },
@@ -292,7 +292,7 @@
     "true_label": "Indemnification",
     "true_risk": "HIGH",
     "pred_label": "Indemnification",
-    "pred_label_score": 0.35,
+    "pred_label_score": 0.2728,
     "pred_risk": "HIGH",
     "pred_risk_score": 0.75
   },
@@ -301,7 +301,7 @@
     "true_label": "Dispute Resolution",
     "true_risk": "NONE",
     "pred_label": "Dispute Resolution",
-    "pred_label_score": 0.45714285714285713,
+    "pred_label_score": 0.2091,
     "pred_risk": "NONE",
     "pred_risk_score": 0.0
   },
@@ -309,8 +309,8 @@
     "id": "disp_002",
     "true_label": "Dispute Resolution",
     "true_risk": "HIGH",
-    "pred_label": "Dispute Resolution",
-    "pred_label_score": 0.45714285714285713,
+    "pred_label": "Governing Law",
+    "pred_label_score": 0.2284,
     "pred_risk": "HIGH",
     "pred_risk_score": 0.75
   },
@@ -319,7 +319,7 @@
     "true_label": "Dispute Resolution",
     "true_risk": "LOW",
     "pred_label": "Dispute Resolution",
-    "pred_label_score": 0.6285714285714286,
+    "pred_label_score": 0.2191,
     "pred_risk": "NONE",
     "pred_risk_score": 0.0
   },
@@ -328,7 +328,7 @@
     "true_label": "Payment Terms",
     "true_risk": "HIGH",
     "pred_label": "Payment Terms",
-    "pred_label_score": 0.33333333333333337,
+    "pred_label_score": 0.2197,
     "pred_risk": "HIGH",
     "pred_risk_score": 0.75
   },
@@ -337,7 +337,7 @@
     "true_label": "Payment Terms",
     "true_risk": "LOW",
     "pred_label": "Payment Terms",
-    "pred_label_score": 0.4,
+    "pred_label_score": 0.2084,
     "pred_risk": "LOW",
     "pred_risk_score": 0.25
   },
@@ -345,17 +345,17 @@
     "id": "pay_003",
     "true_label": "Payment Terms",
     "true_risk": "HIGH",
-    "pred_label": "Warranty",
-    "pred_label_score": 0.35,
-    "pred_risk": "LOW",
-    "pred_risk_score": 0.25
+    "pred_label": "Payment Terms",
+    "pred_label_score": 0.1998,
+    "pred_risk": "HIGH",
+    "pred_risk_score": 0.75
   },
   {
     "id": "ns_001",
     "true_label": "Non-Solicitation",
     "true_risk": "HIGH",
-    "pred_label": "Non-Solicitation",
-    "pred_label_score": 0.4,
+    "pred_label": "Non-Compete",
+    "pred_label_score": 0.2674,
     "pred_risk": "HIGH",
     "pred_risk_score": 0.75
   },
@@ -363,17 +363,17 @@
     "id": "ns_002",
     "true_label": "Non-Solicitation",
     "true_risk": "MEDIUM",
-    "pred_label": "Termination",
-    "pred_label_score": 0.3,
-    "pred_risk": "LOW",
-    "pred_risk_score": 0.25
+    "pred_label": "Non-Compete",
+    "pred_label_score": 0.2726,
+    "pred_risk": "MEDIUM",
+    "pred_risk_score": 0.5
   },
   {
     "id": "fm_001",
     "true_label": "Force Majeure",
     "true_risk": "NONE",
     "pred_label": "Force Majeure",
-    "pred_label_score": 0.6799999999999999,
+    "pred_label_score": 0.2234,
     "pred_risk": "NONE",
     "pred_risk_score": 0.0
   },
@@ -382,7 +382,7 @@
     "true_label": "Force Majeure",
     "true_risk": "HIGH",
     "pred_label": "Force Majeure",
-    "pred_label_score": 0.32,
+    "pred_label_score": 0.2541,
     "pred_risk": "HIGH",
     "pred_risk_score": 0.75
   },
@@ -390,26 +390,26 @@
     "id": "ucl_001",
     "true_label": "Uncapped Liability",
     "true_risk": "CRITICAL",
-    "pred_label": "Other",
-    "pred_label_score": 0.1,
-    "pred_risk": "NONE",
-    "pred_risk_score": 0.0
+    "pred_label": "Uncapped Liability",
+    "pred_label_score": 0.146,
+    "pred_risk": "CRITICAL",
+    "pred_risk_score": 1.0
   },
   {
     "id": "ucl_002",
     "true_label": "Uncapped Liability",
     "true_risk": "CRITICAL",
-    "pred_label": "Other",
-    "pred_label_score": 0.1,
-    "pred_risk": "NONE",
-    "pred_risk_score": 0.0
+    "pred_label": "Liability Limitation",
+    "pred_label_score": 0.1372,
+    "pred_risk": "MEDIUM",
+    "pred_risk_score": 0.5
   },
   {
     "id": "war_001",
     "true_label": "Warranty",
     "true_risk": "LOW",
     "pred_label": "Warranty",
-    "pred_label_score": 0.35,
+    "pred_label_score": 0.167,
     "pred_risk": "LOW",
     "pred_risk_score": 0.25
   },
@@ -418,7 +418,7 @@
     "true_label": "Warranty",
     "true_risk": "HIGH",
     "pred_label": "Warranty",
-    "pred_label_score": 0.5,
+    "pred_label_score": 0.1605,
     "pred_risk": "HIGH",
     "pred_risk_score": 0.75
   },
@@ -427,7 +427,7 @@
     "true_label": "Data Privacy",
     "true_risk": "HIGH",
     "pred_label": "Data Privacy",
-    "pred_label_score": 0.3,
+    "pred_label_score": 0.1424,
     "pred_risk": "HIGH",
     "pred_risk_score": 0.75
   },
@@ -436,7 +436,7 @@
     "true_label": "Data Privacy",
     "true_risk": "LOW",
     "pred_label": "Data Privacy",
-    "pred_label_score": 0.3,
+    "pred_label_score": 0.1456,
     "pred_risk": "HIGH",
     "pred_risk_score": 0.75
   },
@@ -445,7 +445,7 @@
     "true_label": "Assignment",
     "true_risk": "MEDIUM",
     "pred_label": "Assignment",
-    "pred_label_score": 0.35,
+    "pred_label_score": 0.229,
     "pred_risk": "MEDIUM",
     "pred_risk_score": 0.5
   },
@@ -454,7 +454,7 @@
     "true_label": "Assignment",
     "true_risk": "LOW",
     "pred_label": "Assignment",
-    "pred_label_score": 0.35,
+    "pred_label_score": 0.2266,
     "pred_risk": "LOW",
     "pred_risk_score": 0.25
   },
@@ -462,8 +462,8 @@
     "id": "ren_001",
     "true_label": "Renewal/Expiration",
     "true_risk": "MEDIUM",
-    "pred_label": "Notice Period",
-    "pred_label_score": 0.35,
+    "pred_label": "Termination",
+    "pred_label_score": 0.2221,
     "pred_risk": "LOW",
     "pred_risk_score": 0.25
   },
@@ -472,7 +472,7 @@
     "true_label": "Renewal/Expiration",
     "true_risk": "NONE",
     "pred_label": "Renewal/Expiration",
-    "pred_label_score": 0.56,
+    "pred_label_score": 0.1713,
     "pred_risk": "MEDIUM",
     "pred_risk_score": 0.5
   },
@@ -481,7 +481,7 @@
     "true_label": "Severance",
     "true_risk": "HIGH",
     "pred_label": "Severance",
-    "pred_label_score": 0.4,
+    "pred_label_score": 0.1969,
     "pred_risk": "HIGH",
     "pred_risk_score": 0.75
   },
@@ -490,7 +490,7 @@
     "true_label": "Severance",
     "true_risk": "LOW",
     "pred_label": "Severance",
-    "pred_label_score": 0.6,
+    "pred_label_score": 0.1904,
     "pred_risk": "LOW",
     "pred_risk_score": 0.25
   },
@@ -498,17 +498,17 @@
     "id": "aud_001",
     "true_label": "Audit Rights",
     "true_risk": "MEDIUM",
-    "pred_label": "Other",
-    "pred_label_score": 0.1,
-    "pred_risk": "NONE",
-    "pred_risk_score": 0.0
+    "pred_label": "Audit Rights",
+    "pred_label_score": 0.2247,
+    "pred_risk": "MEDIUM",
+    "pred_risk_score": 0.5
   },
   {
     "id": "aud_002",
     "true_label": "Audit Rights",
     "true_risk": "LOW",
-    "pred_label": "Notice Period",
-    "pred_label_score": 0.35,
+    "pred_label": "Audit Rights",
+    "pred_label_score": 0.2391,
     "pred_risk": "LOW",
     "pred_risk_score": 0.25
   }

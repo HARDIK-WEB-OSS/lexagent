@@ -4,6 +4,7 @@ Zero-shot clause classification using nlpaueb/legal-bert-base-uncased.
 Falls back to keyword heuristics if model unavailable.
 """
 import logging
+from pathlib import Path
 import re
 from typing import List, Dict, Optional
 
@@ -129,13 +130,17 @@ class ClassificationAgent:
             logger.info("CLOUD_DEPLOY=true — using keyword classification (no torch needed).")
             self._pipeline_loaded = False
             return
+        import os
+        local = Path(__file__).parent.parent / "models" / "legal-bert-local"
+        model_to_load = str(local) if local.exists() else MODEL_NAME
+        logger.info(f"Loading model from: {model_to_load}")
         try:
             from transformers import pipeline
 
             logger.info("Loading legal-bert zero-shot classification pipeline...")
             self._pipeline = pipeline(
                 "zero-shot-classification",
-                model="nlpaueb/legal-bert-base-uncased",
+                model=model_to_load,
                 device=-1,  # CPU default; upgraded to CUDA below if available
             )
             # Try to move to GPU if available
@@ -144,7 +149,7 @@ class ClassificationAgent:
                 if torch.cuda.is_available():
                     self._pipeline = pipeline(
                         "zero-shot-classification",
-                        model="nlpaueb/legal-bert-base-uncased",
+                        model=model_to_load,
                         device=0,
                     )
                     logger.info("Using CUDA GPU for classification.")
