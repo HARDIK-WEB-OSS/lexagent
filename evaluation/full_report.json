@@ -1,0 +1,318 @@
+{
+  "baseline": {
+    "label": {
+      "accuracy": 0.737,
+      "macro_precision": 0.801,
+      "macro_recall": 0.733,
+      "macro_f1": 0.722,
+      "per_class": {
+        "Assignment": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 2
+        },
+        "Audit Rights": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 2
+        },
+        "Confidentiality/NDA": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 5
+        },
+        "Data Privacy": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 2
+        },
+        "Dispute Resolution": {
+          "precision": 0.6,
+          "recall": 1.0,
+          "f1": 0.75,
+          "support": 3
+        },
+        "Force Majeure": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 2
+        },
+        "Governing Law": {
+          "precision": 1.0,
+          "recall": 0.4,
+          "f1": 0.571,
+          "support": 5
+        },
+        "IP Assignment": {
+          "precision": 0.714,
+          "recall": 1.0,
+          "f1": 0.833,
+          "support": 5
+        },
+        "Indemnification": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 3
+        },
+        "Liability Limitation": {
+          "precision": 1.0,
+          "recall": 0.2,
+          "f1": 0.333,
+          "support": 5
+        },
+        "Non-Compete": {
+          "precision": 1.0,
+          "recall": 0.6,
+          "f1": 0.75,
+          "support": 5
+        },
+        "Non-Solicitation": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 2
+        },
+        "Payment Terms": {
+          "precision": 0.6,
+          "recall": 1.0,
+          "f1": 0.75,
+          "support": 3
+        },
+        "Renewal/Expiration": {
+          "precision": 1.0,
+          "recall": 0.5,
+          "f1": 0.667,
+          "support": 2
+        },
+        "Severance": {
+          "precision": 1.0,
+          "recall": 0.5,
+          "f1": 0.667,
+          "support": 2
+        },
+        "Termination": {
+          "precision": 0.5,
+          "recall": 1.0,
+          "f1": 0.667,
+          "support": 5
+        },
+        "Uncapped Liability": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 2
+        },
+        "Warranty": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 2
+        }
+      },
+      "n": 57
+    },
+    "risk": {
+      "accuracy": 0.561,
+      "macro_precision": 0.728,
+      "macro_recall": 0.639,
+      "macro_f1": 0.599,
+      "per_class": {
+        "CRITICAL": {
+          "precision": 1.0,
+          "recall": 0.75,
+          "f1": 0.857,
+          "support": 4
+        },
+        "HIGH": {
+          "precision": 0.867,
+          "recall": 0.591,
+          "f1": 0.703,
+          "support": 22
+        },
+        "LOW": {
+          "precision": 0.857,
+          "recall": 0.4,
+          "f1": 0.545,
+          "support": 15
+        },
+        "MEDIUM": {
+          "precision": 0.714,
+          "recall": 0.455,
+          "f1": 0.556,
+          "support": 11
+        },
+        "NONE": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "f1": 0.333,
+          "support": 5
+        }
+      },
+      "n": 57
+    }
+  },
+  "lexagent": {
+    "label": {
+      "accuracy": 0.649,
+      "macro_precision": 0.745,
+      "macro_recall": 0.67,
+      "macro_f1": 0.676,
+      "per_class": {
+        "Assignment": {
+          "precision": 0.667,
+          "recall": 1.0,
+          "f1": 0.8,
+          "support": 2
+        },
+        "Audit Rights": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 2
+        },
+        "Confidentiality/NDA": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 5
+        },
+        "Data Privacy": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 2
+        },
+        "Dispute Resolution": {
+          "precision": 0.75,
+          "recall": 1.0,
+          "f1": 0.857,
+          "support": 3
+        },
+        "Force Majeure": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 2
+        },
+        "Governing Law": {
+          "precision": 1.0,
+          "recall": 0.6,
+          "f1": 0.75,
+          "support": 5
+        },
+        "IP Assignment": {
+          "precision": 1.0,
+          "recall": 0.8,
+          "f1": 0.889,
+          "support": 5
+        },
+        "Indemnification": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 3
+        },
+        "Liability Limitation": {
+          "precision": 1.0,
+          "recall": 0.2,
+          "f1": 0.333,
+          "support": 5
+        },
+        "Non-Compete": {
+          "precision": 1.0,
+          "recall": 0.6,
+          "f1": 0.75,
+          "support": 5
+        },
+        "Non-Solicitation": {
+          "precision": 1.0,
+          "recall": 0.5,
+          "f1": 0.667,
+          "support": 2
+        },
+        "Payment Terms": {
+          "precision": 0.5,
+          "recall": 0.667,
+          "f1": 0.571,
+          "support": 3
+        },
+        "Renewal/Expiration": {
+          "precision": 0.5,
+          "recall": 0.5,
+          "f1": 0.5,
+          "support": 2
+        },
+        "Severance": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 2
+        },
+        "Termination": {
+          "precision": 0.333,
+          "recall": 0.2,
+          "f1": 0.25,
+          "support": 5
+        },
+        "Uncapped Liability": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 2
+        },
+        "Warranty": {
+          "precision": 0.667,
+          "recall": 1.0,
+          "f1": 0.8,
+          "support": 2
+        }
+      },
+      "n": 57
+    },
+    "risk": {
+      "accuracy": 0.649,
+      "macro_precision": 0.663,
+      "macro_recall": 0.612,
+      "macro_f1": 0.595,
+      "per_class": {
+        "CRITICAL": {
+          "precision": 1.0,
+          "recall": 0.5,
+          "f1": 0.667,
+          "support": 4
+        },
+        "HIGH": {
+          "precision": 0.857,
+          "recall": 0.818,
+          "f1": 0.837,
+          "support": 22
+        },
+        "LOW": {
+          "precision": 0.625,
+          "recall": 0.667,
+          "f1": 0.645,
+          "support": 15
+        },
+        "MEDIUM": {
+          "precision": 0.5,
+          "recall": 0.273,
+          "f1": 0.353,
+          "support": 11
+        },
+        "NONE": {
+          "precision": 0.333,
+          "recall": 0.8,
+          "f1": 0.471,
+          "support": 5
+        }
+      },
+      "n": 57
+    }
+  }
+}

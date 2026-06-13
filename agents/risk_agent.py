@@ -107,17 +107,29 @@ class RiskAgent:
         self, label: str, text: str
     ) -> Tuple[str, float, str, str]:
         """Dispatch to specific rule set based on clause label."""
-        self._jurisdiction = jurisdiction
+
         dispatch = {
             "Non-Compete": self._score_non_compete,
             "IP Assignment": self._score_ip_assignment,
             "Termination": self._score_termination,
+            "Notice Period": self._score_termination,
             "Confidentiality/NDA": self._score_confidentiality,
             "Liability Limitation": self._score_liability,
             "Cap on Liability": self._score_liability,
             "Uncapped Liability": self._score_uncapped_liability,
             "Governing Law": self._score_governing_law,
             "Jurisdiction": self._score_governing_law,
+            "Indemnification": self._score_indemnification,
+            "Dispute Resolution": self._score_dispute_resolution,
+            "Payment Terms": self._score_payment_terms,
+            "Non-Solicitation": self._score_non_solicitation,
+            "Force Majeure": self._score_force_majeure,
+            "Warranty": self._score_warranty,
+            "Data Privacy": self._score_data_privacy,
+            "Assignment": self._score_assignment,
+            "Renewal/Expiration": self._score_renewal,
+            "Severance": self._score_severance,
+            "Audit Rights": self._score_audit_rights,
         }
         scorer = dispatch.get(label)
         if scorer:
@@ -571,3 +583,216 @@ class RiskAgent:
         if "week" in unit_lower:
             return num * 7
         return num
+
+    # ------------------------------------------------------------------
+    # Indemnification
+    # ------------------------------------------------------------------
+    def _score_indemnification(self, text: str) -> Tuple[str, float, str, str]:
+        t = text.lower()
+        if any(p in t for p in ["unlimited", "all claims", "any and all", "personal liability", "without limitation"]):
+            return ("HIGH", RISK_SCORES["HIGH"],
+                    "Broad indemnification with no cap or carveout exposes you to unlimited personal liability.",
+                    "Negotiate mutual indemnification, add a liability cap, and exclude consequential damages.")
+        if any(p in t for p in ["mutual", "each party", "both parties"]):
+            return ("LOW", RISK_SCORES["LOW"],
+                    "Mutual indemnification — both parties share equal exposure.",
+                    "")
+        return ("MEDIUM", RISK_SCORES["MEDIUM"],
+                "One-sided indemnification clause. Review scope and consider adding a cap.",
+                "Request mutual indemnification or cap indemnity at contract value.")
+
+    # ------------------------------------------------------------------
+    # Dispute Resolution
+    # ------------------------------------------------------------------
+    def _score_dispute_resolution(self, text: str) -> Tuple[str, float, str, str]:
+        t = text.lower()
+        jurisdiction = getattr(self, '_jurisdiction', 'IN')
+        foreign_seats = ["london", "singapore", "new york", "hong kong", "paris", "dubai"]
+        home_terms = {
+            "IN": ["india", "mumbai", "delhi", "bangalore", "chennai"],
+            "UK": ["london", "england", "wales"],
+            "US": ["new york", "delaware", "california"],
+            "SG": ["singapore"],
+        }
+        home = home_terms.get(jurisdiction, home_terms["IN"])
+        is_foreign_seat = any(s in t for s in foreign_seats) and not any(h in t for h in home)
+        if is_foreign_seat:
+            return ("HIGH", RISK_SCORES["HIGH"],
+                    "Arbitration seat is in a foreign jurisdiction, making dispute resolution costly.",
+                    "Negotiate arbitration seat to your home jurisdiction.")
+        if "arbitration" in t and any(h in t for h in home):
+            return ("NONE", RISK_SCORES["NONE"],
+                    "Arbitration in home jurisdiction — standard and acceptable.",
+                    "")
+        if "mediation" in t:
+            return ("LOW", RISK_SCORES["LOW"],
+                    "Mediation-first clause is generally favourable.",
+                    "")
+        return ("LOW", RISK_SCORES["LOW"],
+                "Dispute resolution clause appears standard.",
+                "")
+
+    # ------------------------------------------------------------------
+    # Payment Terms
+    # ------------------------------------------------------------------
+    def _score_payment_terms(self, text: str) -> Tuple[str, float, str, str]:
+        t = text.lower()
+        if any(p in t for p in ["sole discretion", "without notice", "may modify", "subject to change", "no minimum", "no guarantee"]):
+            return ("HIGH", RISK_SCORES["HIGH"],
+                    "Employer retains unilateral right to change compensation without consent.",
+                    "Add clause requiring written consent for any compensation changes.")
+        if any(p in t for p in ["late payment", "interest", "penalty", "overdue"]):
+            return ("LOW", RISK_SCORES["LOW"],
+                    "Late payment penalties are standard commercial terms.",
+                    "")
+        return ("LOW", RISK_SCORES["LOW"],
+                "Payment terms appear standard.",
+                "")
+
+    # ------------------------------------------------------------------
+    # Non-Solicitation
+    # ------------------------------------------------------------------
+    def _score_non_solicitation(self, text: str) -> Tuple[str, float, str, str]:
+        t = text.lower()
+        duration_months = self._extract_max_duration_months(text)
+        is_global = any(term in t for term in GLOBAL_SCOPE_TERMS)
+        if is_global and duration_months > 12:
+            return ("HIGH", RISK_SCORES["HIGH"],
+                    f"Worldwide non-solicitation for {duration_months} months is overly broad.",
+                    "Negotiate to limit geographic scope and reduce duration to 6-12 months.")
+        if duration_months > 24:
+            return ("HIGH", RISK_SCORES["HIGH"],
+                    f"Non-solicitation duration of {duration_months} months is excessive.",
+                    "Negotiate duration down to 12 months maximum.")
+        if duration_months > 12:
+            return ("MEDIUM", RISK_SCORES["MEDIUM"],
+                    f"Non-solicitation of {duration_months} months is above standard.",
+                    "Request reduction to 12 months.")
+        return ("LOW", RISK_SCORES["LOW"],
+                "Non-solicitation scope and duration appear reasonable.",
+                "")
+
+    # ------------------------------------------------------------------
+    # Force Majeure
+    # ------------------------------------------------------------------
+    def _score_force_majeure(self, text: str) -> Tuple[str, float, str, str]:
+        t = text.lower()
+        one_sided = any(p in t for p in ["only employer", "only company", "employee obligations continue",
+                                          "employee shall continue", "not apply to employee"])
+        if one_sided:
+            return ("HIGH", RISK_SCORES["HIGH"],
+                    "Force majeure relief is one-sided — only the employer is excused from performance.",
+                    "Negotiate mutual force majeure protection covering both parties.")
+        return ("NONE", RISK_SCORES["NONE"],
+                "Mutual force majeure clause — standard protection for both parties.",
+                "")
+
+    # ------------------------------------------------------------------
+    # Warranty
+    # ------------------------------------------------------------------
+    def _score_warranty(self, text: str) -> Tuple[str, float, str, str]:
+        t = text.lower()
+        if any(p in t for p in ["as is", "no warranty", "without warranty", "disclaim", "no representation"]):
+            return ("HIGH", RISK_SCORES["HIGH"],
+                    "AS IS clause strips all warranty protections — you have no recourse for defective deliverables.",
+                    "Negotiate minimum fitness-for-purpose warranty with a defined remedy period.")
+        if any(p in t for p in ["90 day", "30 day", "60 day", "conform to spec", "specification"]):
+            return ("LOW", RISK_SCORES["LOW"],
+                    "Time-limited warranty against specification — standard commercial terms.",
+                    "")
+        return ("LOW", RISK_SCORES["LOW"],
+                "Warranty clause appears standard.",
+                "")
+
+    # ------------------------------------------------------------------
+    # Data Privacy
+    # ------------------------------------------------------------------
+    def _score_data_privacy(self, text: str) -> Tuple[str, float, str, str]:
+        t = text.lower()
+        if any(p in t for p in ["without consent", "any business purpose", "third party", "sell", "share"]):
+            return ("HIGH", RISK_SCORES["HIGH"],
+                    "Personal data may be shared with third parties without explicit consent.",
+                    "Require explicit consent for data sharing. Ensure DPDP Act 2023 compliance.")
+        if any(p in t for p in ["only for", "employment purpose", "not shared", "without consent"]):
+            return ("LOW", RISK_SCORES["LOW"],
+                    "Data processing limited to stated purpose — compliant with privacy standards.",
+                    "")
+        return ("MEDIUM", RISK_SCORES["MEDIUM"],
+                "Data privacy scope is unclear. Verify third-party sharing restrictions.",
+                "Clarify data retention period and third-party sharing restrictions.")
+
+    # ------------------------------------------------------------------
+    # Assignment
+    # ------------------------------------------------------------------
+    def _score_assignment(self, text: str) -> Tuple[str, float, str, str]:
+        t = text.lower()
+        if any(p in t for p in ["without consent", "without notice", "sole discretion", "any successor"]):
+            return ("MEDIUM", RISK_SCORES["MEDIUM"],
+                    "Agreement can be assigned to a third party without your consent.",
+                    "Add requirement for written consent before assignment to unknown third parties.")
+        if any(p in t for p in ["prior written consent", "mutual consent", "both parties"]):
+            return ("LOW", RISK_SCORES["LOW"],
+                    "Assignment requires mutual consent — standard protective clause.",
+                    "")
+        return ("LOW", RISK_SCORES["LOW"],
+                "Assignment clause appears standard.",
+                "")
+
+    # ------------------------------------------------------------------
+    # Renewal / Expiration
+    # ------------------------------------------------------------------
+    def _score_renewal(self, text: str) -> Tuple[str, float, str, str]:
+        t = text.lower()
+        if any(p in t for p in ["auto-renew", "automatically renew", "automatic renewal"]):
+            duration_months = self._extract_max_duration_months(text)
+            notice_months = 0
+            import re
+            notice_match = re.search(r'(\d+)\s*(day|month)s?\s*(?:written\s*)?notice', t)
+            if notice_match:
+                n, unit = int(notice_match.group(1)), notice_match.group(2)
+                notice_months = n / 30 if unit == "day" else n
+            if notice_months >= 3 or "90 day" in t:
+                return ("MEDIUM", RISK_SCORES["MEDIUM"],
+                        "Auto-renewal with long notice window — easy to miss the opt-out deadline.",
+                        "Calendar the opt-out deadline at least 30 days before the notice window opens.")
+            return ("MEDIUM", RISK_SCORES["MEDIUM"],
+                    "Auto-renewal clause — contract continues unless actively terminated.",
+                    "Note the renewal date and set a reminder to review before auto-renewal triggers.")
+        return ("NONE", RISK_SCORES["NONE"],
+                "Contract has a defined expiry with no automatic renewal.",
+                "")
+
+    # ------------------------------------------------------------------
+    # Severance
+    # ------------------------------------------------------------------
+    def _score_severance(self, text: str) -> Tuple[str, float, str, str]:
+        t = text.lower()
+        if any(p in t for p in ["no severance", "not entitled", "no payment", "without severance", "for any reason"]):
+            return ("HIGH", RISK_SCORES["HIGH"],
+                    "No severance entitlement on termination — you receive nothing if let go without cause.",
+                    "Negotiate minimum severance of 1-3 months salary for termination without cause.")
+        if any(p in t for p in ["2 month", "3 month", "two month", "three month", "60 day", "90 day"]):
+            return ("LOW", RISK_SCORES["LOW"],
+                    "Severance provision is reasonable — standard commercial terms.",
+                    "")
+        return ("MEDIUM", RISK_SCORES["MEDIUM"],
+                "Severance terms are unclear. Verify entitlement and conditions.",
+                "Clarify severance entitlement for termination without cause.")
+
+    # ------------------------------------------------------------------
+    # Audit Rights
+    # ------------------------------------------------------------------
+    def _score_audit_rights(self, text: str) -> Tuple[str, float, str, str]:
+        t = text.lower()
+        if any(p in t for p in ["any time", "without notice", "without prior notice", "unrestricted"]):
+            return ("MEDIUM", RISK_SCORES["MEDIUM"],
+                    "Audit rights with no notice requirement allows disruptive unannounced inspections.",
+                    "Negotiate minimum 14-day advance notice and limit audit frequency to once per year.")
+        if any(p in t for p in ["30 day", "advance notice", "once per year", "annually"]):
+            return ("LOW", RISK_SCORES["LOW"],
+                    "Audit rights are limited and notice-gated — reasonable commercial terms.",
+                    "")
+        return ("LOW", RISK_SCORES["LOW"],
+                "Audit rights appear standard.",
+                "")
+

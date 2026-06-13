@@ -1,0 +1,115 @@
+"""
+Labeled test dataset for offline evaluation.
+Each entry: clause_text, true_label (clause type), true_risk (CRITICAL/HIGH/MEDIUM/LOW/NONE)
+Extend this to 100+ for a stronger claim. 60 is the minimum credible floor.
+"""
+import json
+
+DATASET = [
+    # NON-COMPETE — HIGH/CRITICAL
+    {"id": "nc_001", "clause_text": "Employee shall not compete with Company or its affiliates on a worldwide basis for a period of 3 years following termination of employment.", "true_label": "Non-Compete", "true_risk": "HIGH"},
+    {"id": "nc_002", "clause_text": "You agree not to engage in any competitive activity anywhere in India for 2 years after leaving.", "true_label": "Non-Compete", "true_risk": "HIGH"},
+    {"id": "nc_003", "clause_text": "Non-compete restricted to Mumbai city limits for 6 months after termination.", "true_label": "Non-Compete", "true_risk": "LOW"},
+    {"id": "nc_004", "clause_text": "Employee shall not join any competing firm globally for 18 months post-termination.", "true_label": "Non-Compete", "true_risk": "HIGH"},
+    {"id": "nc_005", "clause_text": "Employee agrees not to work for a competitor within the local district for 3 months.", "true_label": "Non-Compete", "true_risk": "LOW"},
+
+    # IP ASSIGNMENT — CRITICAL/HIGH
+    {"id": "ip_001", "clause_text": "Employee assigns to Company all work product including inventions developed on personal time using personal equipment outside working hours.", "true_label": "IP Assignment", "true_risk": "CRITICAL"},
+    {"id": "ip_002", "clause_text": "All inventions created by employee during employment are assigned to Company with no carveout for prior inventions.", "true_label": "IP Assignment", "true_risk": "HIGH"},
+    {"id": "ip_003", "clause_text": "IP assignment is limited to inventions made within scope of employment and related to company business. Prior inventions listed in Schedule A are excluded.", "true_label": "IP Assignment", "true_risk": "MEDIUM"},
+    {"id": "ip_004", "clause_text": "Employee assigns all work product including those created using personal equipment on personal time outside business hours.", "true_label": "IP Assignment", "true_risk": "CRITICAL"},
+    {"id": "ip_005", "clause_text": "All inventions developed using company resources are assigned to employer. Pre-existing IP is excluded via Schedule A.", "true_label": "IP Assignment", "true_risk": "MEDIUM"},
+
+    # TERMINATION — HIGH/MEDIUM/LOW
+    {"id": "term_001", "clause_text": "Employer may terminate by giving employee 7 days notice. Employee must give employer 90 days notice of resignation.", "true_label": "Termination", "true_risk": "HIGH"},
+    {"id": "term_002", "clause_text": "Either party may terminate with 30 days written notice.", "true_label": "Termination", "true_risk": "LOW"},
+    {"id": "term_003", "clause_text": "Employer may terminate immediately and without notice for any breach.", "true_label": "Termination", "true_risk": "HIGH"},
+    {"id": "term_004", "clause_text": "Company may terminate with 15 days notice. Employee must provide 60 days notice.", "true_label": "Termination", "true_risk": "HIGH"},
+    {"id": "term_005", "clause_text": "Agreement terminates automatically on expiry of the term unless renewed by mutual written consent.", "true_label": "Termination", "true_risk": "LOW"},
+
+    # CONFIDENTIALITY — HIGH/MEDIUM/LOW
+    {"id": "conf_001", "clause_text": "Confidentiality obligations shall remain in force in perpetuity with no limitation of time.", "true_label": "Confidentiality/NDA", "true_risk": "HIGH"},
+    {"id": "conf_002", "clause_text": "Employee shall keep all confidential information secret forever without any carveout for publicly available information.", "true_label": "Confidentiality/NDA", "true_risk": "HIGH"},
+    {"id": "conf_003", "clause_text": "Confidentiality obligations apply for 2 years post-termination. Standard carveouts apply for publicly known information.", "true_label": "Confidentiality/NDA", "true_risk": "LOW"},
+    {"id": "conf_004", "clause_text": "All proprietary information must remain confidential indefinitely with no exceptions.", "true_label": "Confidentiality/NDA", "true_risk": "HIGH"},
+    {"id": "conf_005", "clause_text": "Confidential information shall be protected for 3 years. Information in the public domain is excluded.", "true_label": "Confidentiality/NDA", "true_risk": "LOW"},
+
+    # LIABILITY — HIGH/MEDIUM/LOW
+    {"id": "liab_001", "clause_text": "Company shall not be liable under any circumstances. No liability whatsoever for any damages.", "true_label": "Liability Limitation", "true_risk": "HIGH"},
+    {"id": "liab_002", "clause_text": "Liability is capped at one month of fees paid in the preceding 30 days.", "true_label": "Liability Limitation", "true_risk": "MEDIUM"},
+    {"id": "liab_003", "clause_text": "Each party's liability is capped at 12 months of fees. Mutual limitation applies to both parties.", "true_label": "Liability Limitation", "true_risk": "LOW"},
+    {"id": "liab_004", "clause_text": "Vendor's total liability shall not exceed zero rupees under any conditions.", "true_label": "Liability Limitation", "true_risk": "HIGH"},
+    {"id": "liab_005", "clause_text": "Liability limited to direct damages only, capped at 6 months of contract value.", "true_label": "Liability Limitation", "true_risk": "MEDIUM"},
+
+    # GOVERNING LAW — MEDIUM/NONE
+    {"id": "gov_001", "clause_text": "This agreement shall be governed by the laws of England and Wales. Disputes shall be resolved by arbitration seated in London.", "true_label": "Governing Law", "true_risk": "HIGH"},
+    {"id": "gov_002", "clause_text": "Governing law is the laws of India. Courts at Bangalore shall have exclusive jurisdiction.", "true_label": "Governing Law", "true_risk": "NONE"},
+    {"id": "gov_003", "clause_text": "This contract is governed by Singapore law and disputes resolved by SIAC arbitration in Singapore.", "true_label": "Governing Law", "true_risk": "MEDIUM"},
+    {"id": "gov_004", "clause_text": "Agreement governed by laws of Delaware, USA. Federal courts of New York shall have jurisdiction.", "true_label": "Governing Law", "true_risk": "MEDIUM"},
+    {"id": "gov_005", "clause_text": "Governed by the laws of Republic of India. Mumbai courts have exclusive jurisdiction.", "true_label": "Governing Law", "true_risk": "NONE"},
+
+    # INDEMNIFICATION
+    {"id": "indem_001", "clause_text": "Employee shall indemnify and hold harmless the Company against all claims, losses, and expenses.", "true_label": "Indemnification", "true_risk": "MEDIUM"},
+    {"id": "indem_002", "clause_text": "Mutual indemnification clause. Each party indemnifies the other for its own negligence.", "true_label": "Indemnification", "true_risk": "LOW"},
+    {"id": "indem_003", "clause_text": "Employee must indemnify Company for any claim arising out of employee's work including personal liability.", "true_label": "Indemnification", "true_risk": "HIGH"},
+
+    # DISPUTE RESOLUTION
+    {"id": "disp_001", "clause_text": "All disputes shall be resolved by binding arbitration in Mumbai under Indian Arbitration Act.", "true_label": "Dispute Resolution", "true_risk": "NONE"},
+    {"id": "disp_002", "clause_text": "Disputes resolved by arbitration in Singapore under ICC rules. Seat of arbitration is Singapore.", "true_label": "Dispute Resolution", "true_risk": "HIGH"},
+    {"id": "disp_003", "clause_text": "Parties agree to mediation before arbitration. Any unresolved dispute goes to Delhi courts.", "true_label": "Dispute Resolution", "true_risk": "LOW"},
+
+    # PAYMENT TERMS
+    {"id": "pay_001", "clause_text": "Salary shall be paid monthly. Company reserves right to modify compensation without notice.", "true_label": "Payment Terms", "true_risk": "HIGH"},
+    {"id": "pay_002", "clause_text": "Fees are payable within 30 days of invoice. Late payments attract 1.5% monthly interest.", "true_label": "Payment Terms", "true_risk": "LOW"},
+    {"id": "pay_003", "clause_text": "Compensation is subject to change at sole discretion of employer with no minimum guarantee.", "true_label": "Payment Terms", "true_risk": "HIGH"},
+
+    # NON-SOLICITATION
+    {"id": "ns_001", "clause_text": "Employee shall not solicit any Company clients or employees for 2 years after termination worldwide.", "true_label": "Non-Solicitation", "true_risk": "HIGH"},
+    {"id": "ns_002", "clause_text": "Employee shall not recruit Company employees for 12 months post-termination within the same city.", "true_label": "Non-Solicitation", "true_risk": "MEDIUM"},
+
+    # FORCE MAJEURE
+    {"id": "fm_001", "clause_text": "Neither party shall be liable for failure to perform due to force majeure events including pandemic, natural disaster, or act of god.", "true_label": "Force Majeure", "true_risk": "NONE"},
+    {"id": "fm_002", "clause_text": "Only employer is excused from performance during force majeure. Employee obligations continue uninterrupted.", "true_label": "Force Majeure", "true_risk": "HIGH"},
+
+    # UNCAPPED LIABILITY
+    {"id": "ucl_001", "clause_text": "Employee accepts unlimited liability for any breach of this agreement without any cap or limitation.", "true_label": "Uncapped Liability", "true_risk": "CRITICAL"},
+    {"id": "ucl_002", "clause_text": "Contractor's liability for IP infringement is uncapped and unlimited in all circumstances.", "true_label": "Uncapped Liability", "true_risk": "CRITICAL"},
+
+    # WARRANTY
+    {"id": "war_001", "clause_text": "Vendor warrants that deliverables will conform to specifications for 90 days post-delivery.", "true_label": "Warranty", "true_risk": "LOW"},
+    {"id": "war_002", "clause_text": "All work is provided AS IS with no warranty of any kind expressed or implied.", "true_label": "Warranty", "true_risk": "HIGH"},
+
+    # DATA PRIVACY
+    {"id": "dp_001", "clause_text": "Company may share employee personal data with third parties without consent for any business purpose.", "true_label": "Data Privacy", "true_risk": "HIGH"},
+    {"id": "dp_002", "clause_text": "Personal data processed only for employment purposes and not shared with third parties without consent.", "true_label": "Data Privacy", "true_risk": "LOW"},
+
+    # ASSIGNMENT
+    {"id": "asgn_001", "clause_text": "Company may assign this agreement to any successor entity without employee consent.", "true_label": "Assignment", "true_risk": "MEDIUM"},
+    {"id": "asgn_002", "clause_text": "Neither party may assign this agreement without prior written consent of the other party.", "true_label": "Assignment", "true_risk": "LOW"},
+
+    # RENEWAL/EXPIRATION
+    {"id": "ren_001", "clause_text": "Agreement auto-renews annually unless terminated with 90 days written notice.", "true_label": "Renewal/Expiration", "true_risk": "MEDIUM"},
+    {"id": "ren_002", "clause_text": "Contract expires on the end date. No automatic renewal. Continuation requires new agreement.", "true_label": "Renewal/Expiration", "true_risk": "NONE"},
+
+    # SEVERANCE
+    {"id": "sev_001", "clause_text": "No severance shall be paid upon termination for any reason whatsoever.", "true_label": "Severance", "true_risk": "HIGH"},
+    {"id": "sev_002", "clause_text": "Employee receives 2 months severance pay on termination without cause.", "true_label": "Severance", "true_risk": "LOW"},
+
+    # AUDIT RIGHTS
+    {"id": "aud_001", "clause_text": "Client may audit vendor's systems and records at any time without prior notice.", "true_label": "Audit Rights", "true_risk": "MEDIUM"},
+    {"id": "aud_002", "clause_text": "Audit rights limited to financial records with 30 days advance written notice. Once per year maximum.", "true_label": "Audit Rights", "true_risk": "LOW"},
+]
+
+with open('evaluation/test_dataset.json', 'w') as f:
+    json.dump(DATASET, f, indent=2)
+
+print(f"Dataset created: {len(DATASET)} labeled clauses")
+
+# Print distribution
+from collections import Counter
+label_dist = Counter(d['true_label'] for d in DATASET)
+risk_dist = Counter(d['true_risk'] for d in DATASET)
+print("\nLabel distribution:")
+for k, v in sorted(label_dist.items()): print(f"  {k}: {v}")
+print("\nRisk distribution:")
+for k, v in sorted(risk_dist.items()): print(f"  {k}: {v}")

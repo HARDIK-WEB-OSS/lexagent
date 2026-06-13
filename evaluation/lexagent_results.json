@@ -1,0 +1,515 @@
+[
+  {
+    "id": "nc_001",
+    "true_label": "Non-Compete",
+    "true_risk": "HIGH",
+    "pred_label": "Non-Compete",
+    "pred_label_score": 0.3,
+    "pred_risk": "HIGH",
+    "pred_risk_score": 0.75
+  },
+  {
+    "id": "nc_002",
+    "true_label": "Non-Compete",
+    "true_risk": "HIGH",
+    "pred_label": "Non-Compete",
+    "pred_label_score": 0.3,
+    "pred_risk": "HIGH",
+    "pred_risk_score": 0.75
+  },
+  {
+    "id": "nc_003",
+    "true_label": "Non-Compete",
+    "true_risk": "LOW",
+    "pred_label": "Non-Compete",
+    "pred_label_score": 0.3,
+    "pred_risk": "MEDIUM",
+    "pred_risk_score": 0.5
+  },
+  {
+    "id": "nc_004",
+    "true_label": "Non-Compete",
+    "true_risk": "HIGH",
+    "pred_label": "Termination",
+    "pred_label_score": 0.3,
+    "pred_risk": "LOW",
+    "pred_risk_score": 0.25
+  },
+  {
+    "id": "nc_005",
+    "true_label": "Non-Compete",
+    "true_risk": "LOW",
+    "pred_label": "Other",
+    "pred_label_score": 0.1,
+    "pred_risk": "NONE",
+    "pred_risk_score": 0.0
+  },
+  {
+    "id": "ip_001",
+    "true_label": "IP Assignment",
+    "true_risk": "CRITICAL",
+    "pred_label": "IP Assignment",
+    "pred_label_score": 0.45714285714285713,
+    "pred_risk": "CRITICAL",
+    "pred_risk_score": 1.0
+  },
+  {
+    "id": "ip_002",
+    "true_label": "IP Assignment",
+    "true_risk": "HIGH",
+    "pred_label": "IP Assignment",
+    "pred_label_score": 0.37142857142857144,
+    "pred_risk": "MEDIUM",
+    "pred_risk_score": 0.5
+  },
+  {
+    "id": "ip_003",
+    "true_label": "IP Assignment",
+    "true_risk": "MEDIUM",
+    "pred_label": "Assignment",
+    "pred_label_score": 0.5,
+    "pred_risk": "LOW",
+    "pred_risk_score": 0.25
+  },
+  {
+    "id": "ip_004",
+    "true_label": "IP Assignment",
+    "true_risk": "CRITICAL",
+    "pred_label": "IP Assignment",
+    "pred_label_score": 0.37142857142857144,
+    "pred_risk": "CRITICAL",
+    "pred_risk_score": 1.0
+  },
+  {
+    "id": "ip_005",
+    "true_label": "IP Assignment",
+    "true_risk": "MEDIUM",
+    "pred_label": "IP Assignment",
+    "pred_label_score": 0.37142857142857144,
+    "pred_risk": "MEDIUM",
+    "pred_risk_score": 0.5
+  },
+  {
+    "id": "term_001",
+    "true_label": "Termination",
+    "true_risk": "HIGH",
+    "pred_label": "Notice Period",
+    "pred_label_score": 0.35,
+    "pred_risk": "HIGH",
+    "pred_risk_score": 0.75
+  },
+  {
+    "id": "term_002",
+    "true_label": "Termination",
+    "true_risk": "LOW",
+    "pred_label": "Notice Period",
+    "pred_label_score": 0.35,
+    "pred_risk": "LOW",
+    "pred_risk_score": 0.25
+  },
+  {
+    "id": "term_003",
+    "true_label": "Termination",
+    "true_risk": "HIGH",
+    "pred_label": "Termination",
+    "pred_label_score": 0.3,
+    "pred_risk": "HIGH",
+    "pred_risk_score": 0.75
+  },
+  {
+    "id": "term_004",
+    "true_label": "Termination",
+    "true_risk": "HIGH",
+    "pred_label": "Notice Period",
+    "pred_label_score": 0.35,
+    "pred_risk": "HIGH",
+    "pred_risk_score": 0.75
+  },
+  {
+    "id": "term_005",
+    "true_label": "Termination",
+    "true_risk": "LOW",
+    "pred_label": "Renewal/Expiration",
+    "pred_label_score": 0.32,
+    "pred_risk": "NONE",
+    "pred_risk_score": 0.0
+  },
+  {
+    "id": "conf_001",
+    "true_label": "Confidentiality/NDA",
+    "true_risk": "HIGH",
+    "pred_label": "Confidentiality/NDA",
+    "pred_label_score": 0.4,
+    "pred_risk": "HIGH",
+    "pred_risk_score": 0.75
+  },
+  {
+    "id": "conf_002",
+    "true_label": "Confidentiality/NDA",
+    "true_risk": "HIGH",
+    "pred_label": "Confidentiality/NDA",
+    "pred_label_score": 0.3,
+    "pred_risk": "HIGH",
+    "pred_risk_score": 0.75
+  },
+  {
+    "id": "conf_003",
+    "true_label": "Confidentiality/NDA",
+    "true_risk": "LOW",
+    "pred_label": "Confidentiality/NDA",
+    "pred_label_score": 0.5,
+    "pred_risk": "LOW",
+    "pred_risk_score": 0.25
+  },
+  {
+    "id": "conf_004",
+    "true_label": "Confidentiality/NDA",
+    "true_risk": "HIGH",
+    "pred_label": "Confidentiality/NDA",
+    "pred_label_score": 0.4,
+    "pred_risk": "HIGH",
+    "pred_risk_score": 0.75
+  },
+  {
+    "id": "conf_005",
+    "true_label": "Confidentiality/NDA",
+    "true_risk": "LOW",
+    "pred_label": "Confidentiality/NDA",
+    "pred_label_score": 0.3,
+    "pred_risk": "LOW",
+    "pred_risk_score": 0.25
+  },
+  {
+    "id": "liab_001",
+    "true_label": "Liability Limitation",
+    "true_risk": "HIGH",
+    "pred_label": "Liability Limitation",
+    "pred_label_score": 0.4,
+    "pred_risk": "HIGH",
+    "pred_risk_score": 0.75
+  },
+  {
+    "id": "liab_002",
+    "true_label": "Liability Limitation",
+    "true_risk": "MEDIUM",
+    "pred_label": "Payment Terms",
+    "pred_label_score": 0.26666666666666666,
+    "pred_risk": "LOW",
+    "pred_risk_score": 0.25
+  },
+  {
+    "id": "liab_003",
+    "true_label": "Liability Limitation",
+    "true_risk": "LOW",
+    "pred_label": "Payment Terms",
+    "pred_label_score": 0.26666666666666666,
+    "pred_risk": "LOW",
+    "pred_risk_score": 0.25
+  },
+  {
+    "id": "liab_004",
+    "true_label": "Liability Limitation",
+    "true_risk": "HIGH",
+    "pred_label": "Other",
+    "pred_label_score": 0.1,
+    "pred_risk": "NONE",
+    "pred_risk_score": 0.0
+  },
+  {
+    "id": "liab_005",
+    "true_label": "Liability Limitation",
+    "true_risk": "MEDIUM",
+    "pred_label": "Other",
+    "pred_label_score": 0.1,
+    "pred_risk": "NONE",
+    "pred_risk_score": 0.0
+  },
+  {
+    "id": "gov_001",
+    "true_label": "Governing Law",
+    "true_risk": "HIGH",
+    "pred_label": "Governing Law",
+    "pred_label_score": 0.5,
+    "pred_risk": "HIGH",
+    "pred_risk_score": 0.75
+  },
+  {
+    "id": "gov_002",
+    "true_label": "Governing Law",
+    "true_risk": "NONE",
+    "pred_label": "Governing Law",
+    "pred_label_score": 0.5,
+    "pred_risk": "NONE",
+    "pred_risk_score": 0.0
+  },
+  {
+    "id": "gov_003",
+    "true_label": "Governing Law",
+    "true_risk": "MEDIUM",
+    "pred_label": "Dispute Resolution",
+    "pred_label_score": 0.45714285714285713,
+    "pred_risk": "HIGH",
+    "pred_risk_score": 0.75
+  },
+  {
+    "id": "gov_004",
+    "true_label": "Governing Law",
+    "true_risk": "MEDIUM",
+    "pred_label": "Jurisdiction",
+    "pred_label_score": 0.6,
+    "pred_risk": "MEDIUM",
+    "pred_risk_score": 0.5
+  },
+  {
+    "id": "gov_005",
+    "true_label": "Governing Law",
+    "true_risk": "NONE",
+    "pred_label": "Governing Law",
+    "pred_label_score": 0.5,
+    "pred_risk": "NONE",
+    "pred_risk_score": 0.0
+  },
+  {
+    "id": "indem_001",
+    "true_label": "Indemnification",
+    "true_risk": "MEDIUM",
+    "pred_label": "Indemnification",
+    "pred_label_score": 0.5,
+    "pred_risk": "HIGH",
+    "pred_risk_score": 0.75
+  },
+  {
+    "id": "indem_002",
+    "true_label": "Indemnification",
+    "true_risk": "LOW",
+    "pred_label": "Indemnification",
+    "pred_label_score": 0.35,
+    "pred_risk": "LOW",
+    "pred_risk_score": 0.25
+  },
+  {
+    "id": "indem_003",
+    "true_label": "Indemnification",
+    "true_risk": "HIGH",
+    "pred_label": "Indemnification",
+    "pred_label_score": 0.35,
+    "pred_risk": "HIGH",
+    "pred_risk_score": 0.75
+  },
+  {
+    "id": "disp_001",
+    "true_label": "Dispute Resolution",
+    "true_risk": "NONE",
+    "pred_label": "Dispute Resolution",
+    "pred_label_score": 0.45714285714285713,
+    "pred_risk": "NONE",
+    "pred_risk_score": 0.0
+  },
+  {
+    "id": "disp_002",
+    "true_label": "Dispute Resolution",
+    "true_risk": "HIGH",
+    "pred_label": "Dispute Resolution",
+    "pred_label_score": 0.45714285714285713,
+    "pred_risk": "HIGH",
+    "pred_risk_score": 0.75
+  },
+  {
+    "id": "disp_003",
+    "true_label": "Dispute Resolution",
+    "true_risk": "LOW",
+    "pred_label": "Dispute Resolution",
+    "pred_label_score": 0.6285714285714286,
+    "pred_risk": "NONE",
+    "pred_risk_score": 0.0
+  },
+  {
+    "id": "pay_001",
+    "true_label": "Payment Terms",
+    "true_risk": "HIGH",
+    "pred_label": "Payment Terms",
+    "pred_label_score": 0.33333333333333337,
+    "pred_risk": "HIGH",
+    "pred_risk_score": 0.75
+  },
+  {
+    "id": "pay_002",
+    "true_label": "Payment Terms",
+    "true_risk": "LOW",
+    "pred_label": "Payment Terms",
+    "pred_label_score": 0.4,
+    "pred_risk": "LOW",
+    "pred_risk_score": 0.25
+  },
+  {
+    "id": "pay_003",
+    "true_label": "Payment Terms",
+    "true_risk": "HIGH",
+    "pred_label": "Warranty",
+    "pred_label_score": 0.35,
+    "pred_risk": "LOW",
+    "pred_risk_score": 0.25
+  },
+  {
+    "id": "ns_001",
+    "true_label": "Non-Solicitation",
+    "true_risk": "HIGH",
+    "pred_label": "Non-Solicitation",
+    "pred_label_score": 0.4,
+    "pred_risk": "HIGH",
+    "pred_risk_score": 0.75
+  },
+  {
+    "id": "ns_002",
+    "true_label": "Non-Solicitation",
+    "true_risk": "MEDIUM",
+    "pred_label": "Termination",
+    "pred_label_score": 0.3,
+    "pred_risk": "LOW",
+    "pred_risk_score": 0.25
+  },
+  {
+    "id": "fm_001",
+    "true_label": "Force Majeure",
+    "true_risk": "NONE",
+    "pred_label": "Force Majeure",
+    "pred_label_score": 0.6799999999999999,
+    "pred_risk": "NONE",
+    "pred_risk_score": 0.0
+  },
+  {
+    "id": "fm_002",
+    "true_label": "Force Majeure",
+    "true_risk": "HIGH",
+    "pred_label": "Force Majeure",
+    "pred_label_score": 0.32,
+    "pred_risk": "HIGH",
+    "pred_risk_score": 0.75
+  },
+  {
+    "id": "ucl_001",
+    "true_label": "Uncapped Liability",
+    "true_risk": "CRITICAL",
+    "pred_label": "Other",
+    "pred_label_score": 0.1,
+    "pred_risk": "NONE",
+    "pred_risk_score": 0.0
+  },
+  {
+    "id": "ucl_002",
+    "true_label": "Uncapped Liability",
+    "true_risk": "CRITICAL",
+    "pred_label": "Other",
+    "pred_label_score": 0.1,
+    "pred_risk": "NONE",
+    "pred_risk_score": 0.0
+  },
+  {
+    "id": "war_001",
+    "true_label": "Warranty",
+    "true_risk": "LOW",
+    "pred_label": "Warranty",
+    "pred_label_score": 0.35,
+    "pred_risk": "LOW",
+    "pred_risk_score": 0.25
+  },
+  {
+    "id": "war_002",
+    "true_label": "Warranty",
+    "true_risk": "HIGH",
+    "pred_label": "Warranty",
+    "pred_label_score": 0.5,
+    "pred_risk": "HIGH",
+    "pred_risk_score": 0.75
+  },
+  {
+    "id": "dp_001",
+    "true_label": "Data Privacy",
+    "true_risk": "HIGH",
+    "pred_label": "Data Privacy",
+    "pred_label_score": 0.3,
+    "pred_risk": "HIGH",
+    "pred_risk_score": 0.75
+  },
+  {
+    "id": "dp_002",
+    "true_label": "Data Privacy",
+    "true_risk": "LOW",
+    "pred_label": "Data Privacy",
+    "pred_label_score": 0.3,
+    "pred_risk": "HIGH",
+    "pred_risk_score": 0.75
+  },
+  {
+    "id": "asgn_001",
+    "true_label": "Assignment",
+    "true_risk": "MEDIUM",
+    "pred_label": "Assignment",
+    "pred_label_score": 0.35,
+    "pred_risk": "MEDIUM",
+    "pred_risk_score": 0.5
+  },
+  {
+    "id": "asgn_002",
+    "true_label": "Assignment",
+    "true_risk": "LOW",
+    "pred_label": "Assignment",
+    "pred_label_score": 0.35,
+    "pred_risk": "LOW",
+    "pred_risk_score": 0.25
+  },
+  {
+    "id": "ren_001",
+    "true_label": "Renewal/Expiration",
+    "true_risk": "MEDIUM",
+    "pred_label": "Notice Period",
+    "pred_label_score": 0.35,
+    "pred_risk": "LOW",
+    "pred_risk_score": 0.25
+  },
+  {
+    "id": "ren_002",
+    "true_label": "Renewal/Expiration",
+    "true_risk": "NONE",
+    "pred_label": "Renewal/Expiration",
+    "pred_label_score": 0.56,
+    "pred_risk": "MEDIUM",
+    "pred_risk_score": 0.5
+  },
+  {
+    "id": "sev_001",
+    "true_label": "Severance",
+    "true_risk": "HIGH",
+    "pred_label": "Severance",
+    "pred_label_score": 0.4,
+    "pred_risk": "HIGH",
+    "pred_risk_score": 0.75
+  },
+  {
+    "id": "sev_002",
+    "true_label": "Severance",
+    "true_risk": "LOW",
+    "pred_label": "Severance",
+    "pred_label_score": 0.6,
+    "pred_risk": "LOW",
+    "pred_risk_score": 0.25
+  },
+  {
+    "id": "aud_001",
+    "true_label": "Audit Rights",
+    "true_risk": "MEDIUM",
+    "pred_label": "Other",
+    "pred_label_score": 0.1,
+    "pred_risk": "NONE",
+    "pred_risk_score": 0.0
+  },
+  {
+    "id": "aud_002",
+    "true_label": "Audit Rights",
+    "true_risk": "LOW",
+    "pred_label": "Notice Period",
+    "pred_label_score": 0.35,
+    "pred_risk": "LOW",
+    "pred_risk_score": 0.25
+  }
+]
