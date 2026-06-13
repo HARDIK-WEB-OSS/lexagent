@@ -1,0 +1,110 @@
+[
+  {
+    "id": "nc_006",
+    "clause_text": "Post-termination non-compete is limited to direct competitors in the same product category within the same country for 6 months.",
+    "true_label": "Non-Compete",
+    "true_risk": "LOW"
+  },
+  {
+    "id": "ip_006",
+    "clause_text": "IP assignment covers only work directly related to company projects. Side projects unrelated to company business are excluded.",
+    "true_label": "IP Assignment",
+    "true_risk": "LOW"
+  },
+  {
+    "id": "term_006",
+    "clause_text": "Either party may terminate for material breach with 14 days written notice and opportunity to cure within that period.",
+    "true_label": "Termination",
+    "true_risk": "LOW"
+  },
+  {
+    "id": "conf_006",
+    "clause_text": "Confidentiality obligations survive termination for 5 years. Standard carveouts for publicly available and independently developed information apply.",
+    "true_label": "Confidentiality/NDA",
+    "true_risk": "LOW"
+  },
+  {
+    "id": "liab_006",
+    "clause_text": "Each party's aggregate liability is capped at 12 months of fees paid. Cap applies equally to both parties.",
+    "true_label": "Liability Limitation",
+    "true_risk": "LOW"
+  },
+  {
+    "id": "gov_006",
+    "clause_text": "This agreement is governed by the laws of the State of New York. Disputes resolved in federal courts of New York.",
+    "true_label": "Governing Law",
+    "true_risk": "MEDIUM"
+  },
+  {
+    "id": "indem_006",
+    "clause_text": "Contractor indemnifies client for all losses, costs, and expenses without any cap or limitation on the indemnity obligation.",
+    "true_label": "Indemnification",
+    "true_risk": "HIGH"
+  },
+  {
+    "id": "disp_006",
+    "clause_text": "Any dispute shall be referred to a sole arbitrator appointed by mutual consent. Seat of arbitration shall be Mumbai.",
+    "true_label": "Dispute Resolution",
+    "true_risk": "NONE"
+  },
+  {
+    "id": "pay_006",
+    "clause_text": "Salary is fixed for the contract term and may not be reduced without employee's written consent.",
+    "true_label": "Payment Terms",
+    "true_risk": "LOW"
+  },
+  {
+    "id": "ns_006",
+    "clause_text": "Employee shall not recruit or solicit Company personnel for 12 months after termination within the same city.",
+    "true_label": "Non-Solicitation",
+    "true_risk": "LOW"
+  },
+  {
+    "id": "fm_006",
+    "clause_text": "Only the Company may invoke force majeure. Employee performance obligations continue uninterrupted under all circumstances.",
+    "true_label": "Force Majeure",
+    "true_risk": "HIGH"
+  },
+  {
+    "id": "ucl_006",
+    "clause_text": "Neither party's liability for death or personal injury caused by negligence shall be limited or excluded.",
+    "true_label": "Uncapped Liability",
+    "true_risk": "LOW"
+  },
+  {
+    "id": "war_006",
+    "clause_text": "All warranties express or implied including merchantability and fitness for purpose are hereby disclaimed in their entirety.",
+    "true_label": "Warranty",
+    "true_risk": "HIGH"
+  },
+  {
+    "id": "dp_006",
+    "clause_text": "All personal data processing complies with DPDP Act 2023. Data is not shared with third parties without explicit consent.",
+    "true_label": "Data Privacy",
+    "true_risk": "LOW"
+  },
+  {
+    "id": "asgn_006",
+    "clause_text": "Employee may not assign any rights or obligations under this agreement. Company may assign freely without restriction.",
+    "true_label": "Assignment",
+    "true_risk": "MEDIUM"
+  },
+  {
+    "id": "ren_006",
+    "clause_text": "Agreement terminates automatically at end of term. Parties must negotiate and execute a new contract for any extension.",
+    "true_label": "Renewal/Expiration",
+    "true_risk": "NONE"
+  },
+  {
+    "id": "sev_006",
+    "clause_text": "No severance is payable if employee is terminated for cause or resigns voluntarily under any circumstances.",
+    "true_label": "Severance",
+    "true_risk": "MEDIUM"
+  },
+  {
+    "id": "aud_006",
+    "clause_text": "Vendor grants audit rights to client upon reasonable notice. Audits limited to compliance verification only.",
+    "true_label": "Audit Rights",
+    "true_risk": "LOW"
+  }
+]

@@ -1,0 +1,15 @@
+{
+  "holdout_n": 18,
+  "lexagent": {
+    "clf_acc": 0.944,
+    "clf_f1": 0.926,
+    "risk_acc": 0.5,
+    "risk_f1": 0.502
+  },
+  "baseline": {
+    "clf_acc": 0.611,
+    "clf_f1": 0.522,
+    "risk_acc": 0.389,
+    "risk_f1": 0.302
+  }
+}

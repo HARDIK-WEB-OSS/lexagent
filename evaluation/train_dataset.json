@@ -198,6 +198,18 @@
     "true_risk": "HIGH"
   },
   {
+    "id": "indem_004",
+    "clause_text": "Each party shall indemnify the other for losses arising from its own breach of this agreement up to the contract value.",
+    "true_label": "Indemnification",
+    "true_risk": "LOW"
+  },
+  {
+    "id": "indem_005",
+    "clause_text": "Employee shall indemnify Company against all third party claims arising from employee's gross negligence or willful misconduct.",
+    "true_label": "Indemnification",
+    "true_risk": "MEDIUM"
+  },
+  {
     "id": "disp_001",
     "clause_text": "All disputes shall be resolved by binding arbitration in Mumbai under Indian Arbitration Act.",
     "true_label": "Dispute Resolution",
@@ -214,6 +226,18 @@
     "clause_text": "Parties agree to mediation before arbitration. Any unresolved dispute goes to Delhi courts.",
     "true_label": "Dispute Resolution",
     "true_risk": "LOW"
+  },
+  {
+    "id": "disp_004",
+    "clause_text": "All disputes shall be resolved exclusively by courts of England and Wales applying English law.",
+    "true_label": "Dispute Resolution",
+    "true_risk": "HIGH"
+  },
+  {
+    "id": "disp_005",
+    "clause_text": "Disputes escalate through negotiation, then mediation, then binding arbitration in Delhi under Indian Arbitration Act 1996.",
+    "true_label": "Dispute Resolution",
+    "true_risk": "NONE"
   },
   {
     "id": "pay_001",
@@ -234,6 +258,18 @@
     "true_risk": "HIGH"
   },
   {
+    "id": "pay_004",
+    "clause_text": "Compensation is reviewed annually at Company's sole discretion. No guaranteed minimum increase or maintenance of current salary.",
+    "true_label": "Payment Terms",
+    "true_risk": "HIGH"
+  },
+  {
+    "id": "pay_005",
+    "clause_text": "Payment of invoices within 45 days of receipt. Both parties agree to standard commercial payment terms.",
+    "true_label": "Payment Terms",
+    "true_risk": "LOW"
+  },
+  {
     "id": "ns_001",
     "clause_text": "Employee shall not solicit any Company clients or employees for 2 years after termination worldwide.",
     "true_label": "Non-Solicitation",
@@ -244,102 +280,6 @@
     "clause_text": "Employee shall not recruit Company employees for 12 months post-termination within the same city.",
     "true_label": "Non-Solicitation",
     "true_risk": "MEDIUM"
-  },
-  {
-    "id": "fm_001",
-    "clause_text": "Neither party shall be liable for failure to perform due to force majeure events including pandemic, natural disaster, or act of god.",
-    "true_label": "Force Majeure",
-    "true_risk": "NONE"
-  },
-  {
-    "id": "fm_002",
-    "clause_text": "Only employer is excused from performance during force majeure. Employee obligations continue uninterrupted.",
-    "true_label": "Force Majeure",
-    "true_risk": "HIGH"
-  },
-  {
-    "id": "ucl_001",
-    "clause_text": "Employee accepts unlimited liability for any breach of this agreement without any cap or limitation.",
-    "true_label": "Uncapped Liability",
-    "true_risk": "CRITICAL"
-  },
-  {
-    "id": "ucl_002",
-    "clause_text": "Contractor's liability for IP infringement is uncapped and unlimited in all circumstances.",
-    "true_label": "Uncapped Liability",
-    "true_risk": "CRITICAL"
-  },
-  {
-    "id": "war_001",
-    "clause_text": "Vendor warrants that deliverables will conform to specifications for 90 days post-delivery.",
-    "true_label": "Warranty",
-    "true_risk": "LOW"
-  },
-  {
-    "id": "war_002",
-    "clause_text": "All work is provided AS IS with no warranty of any kind expressed or implied.",
-    "true_label": "Warranty",
-    "true_risk": "HIGH"
-  },
-  {
-    "id": "dp_001",
-    "clause_text": "Company may share employee personal data with third parties without consent for any business purpose.",
-    "true_label": "Data Privacy",
-    "true_risk": "HIGH"
-  },
-  {
-    "id": "dp_002",
-    "clause_text": "Personal data processed only for employment purposes and not shared with third parties without consent.",
-    "true_label": "Data Privacy",
-    "true_risk": "LOW"
-  },
-  {
-    "id": "asgn_001",
-    "clause_text": "Company may assign this agreement to any successor entity without employee consent.",
-    "true_label": "Assignment",
-    "true_risk": "MEDIUM"
-  },
-  {
-    "id": "asgn_002",
-    "clause_text": "Neither party may assign this agreement without prior written consent of the other party.",
-    "true_label": "Assignment",
-    "true_risk": "LOW"
-  },
-  {
-    "id": "ren_001",
-    "clause_text": "Agreement auto-renews annually unless terminated with 90 days written notice.",
-    "true_label": "Renewal/Expiration",
-    "true_risk": "MEDIUM"
-  },
-  {
-    "id": "ren_002",
-    "clause_text": "Contract expires on the end date. No automatic renewal. Continuation requires new agreement.",
-    "true_label": "Renewal/Expiration",
-    "true_risk": "NONE"
-  },
-  {
-    "id": "sev_001",
-    "clause_text": "No severance shall be paid upon termination for any reason whatsoever.",
-    "true_label": "Severance",
-    "true_risk": "HIGH"
-  },
-  {
-    "id": "sev_002",
-    "clause_text": "Employee receives 2 months severance pay on termination without cause.",
-    "true_label": "Severance",
-    "true_risk": "LOW"
-  },
-  {
-    "id": "aud_001",
-    "clause_text": "Client may audit vendor's systems and records at any time without prior notice.",
-    "true_label": "Audit Rights",
-    "true_risk": "MEDIUM"
-  },
-  {
-    "id": "aud_002",
-    "clause_text": "Audit rights limited to financial records with 30 days advance written notice. Once per year maximum.",
-    "true_label": "Audit Rights",
-    "true_risk": "LOW"
   },
   {
     "id": "ns_003",
@@ -360,10 +300,16 @@
     "true_risk": "HIGH"
   },
   {
-    "id": "ns_006",
-    "clause_text": "Employee shall not recruit or solicit Company personnel for 12 months after termination within the same city.",
-    "true_label": "Non-Solicitation",
-    "true_risk": "LOW"
+    "id": "fm_001",
+    "clause_text": "Neither party shall be liable for failure to perform due to force majeure events including pandemic, natural disaster, or act of god.",
+    "true_label": "Force Majeure",
+    "true_risk": "NONE"
+  },
+  {
+    "id": "fm_002",
+    "clause_text": "Only employer is excused from performance during force majeure. Employee obligations continue uninterrupted.",
+    "true_label": "Force Majeure",
+    "true_risk": "HIGH"
   },
   {
     "id": "fm_003",
@@ -384,10 +330,16 @@
     "true_risk": "NONE"
   },
   {
-    "id": "fm_006",
-    "clause_text": "Only the Company may invoke force majeure. Employee performance obligations continue uninterrupted under all circumstances.",
-    "true_label": "Force Majeure",
-    "true_risk": "HIGH"
+    "id": "ucl_001",
+    "clause_text": "Employee accepts unlimited liability for any breach of this agreement without any cap or limitation.",
+    "true_label": "Uncapped Liability",
+    "true_risk": "CRITICAL"
+  },
+  {
+    "id": "ucl_002",
+    "clause_text": "Contractor's liability for IP infringement is uncapped and unlimited in all circumstances.",
+    "true_label": "Uncapped Liability",
+    "true_risk": "CRITICAL"
   },
   {
     "id": "ucl_003",
@@ -408,10 +360,16 @@
     "true_risk": "MEDIUM"
   },
   {
-    "id": "ucl_006",
-    "clause_text": "Neither party's liability for death or personal injury caused by negligence shall be limited or excluded.",
-    "true_label": "Uncapped Liability",
+    "id": "war_001",
+    "clause_text": "Vendor warrants that deliverables will conform to specifications for 90 days post-delivery.",
+    "true_label": "Warranty",
     "true_risk": "LOW"
+  },
+  {
+    "id": "war_002",
+    "clause_text": "All work is provided AS IS with no warranty of any kind expressed or implied.",
+    "true_label": "Warranty",
+    "true_risk": "HIGH"
   },
   {
     "id": "war_003",
@@ -432,10 +390,16 @@
     "true_risk": "LOW"
   },
   {
-    "id": "war_006",
-    "clause_text": "All warranties express or implied including merchantability and fitness for purpose are hereby disclaimed in their entirety.",
-    "true_label": "Warranty",
+    "id": "dp_001",
+    "clause_text": "Company may share employee personal data with third parties without consent for any business purpose.",
+    "true_label": "Data Privacy",
     "true_risk": "HIGH"
+  },
+  {
+    "id": "dp_002",
+    "clause_text": "Personal data processed only for employment purposes and not shared with third parties without consent.",
+    "true_label": "Data Privacy",
+    "true_risk": "LOW"
   },
   {
     "id": "dp_003",
@@ -456,9 +420,15 @@
     "true_risk": "MEDIUM"
   },
   {
-    "id": "dp_006",
-    "clause_text": "All personal data processing complies with DPDP Act 2023. Data is not shared with third parties without explicit consent.",
-    "true_label": "Data Privacy",
+    "id": "asgn_001",
+    "clause_text": "Company may assign this agreement to any successor entity without employee consent.",
+    "true_label": "Assignment",
+    "true_risk": "MEDIUM"
+  },
+  {
+    "id": "asgn_002",
+    "clause_text": "Neither party may assign this agreement without prior written consent of the other party.",
+    "true_label": "Assignment",
     "true_risk": "LOW"
   },
   {
@@ -480,10 +450,16 @@
     "true_risk": "MEDIUM"
   },
   {
-    "id": "asgn_006",
-    "clause_text": "Employee may not assign any rights or obligations under this agreement. Company may assign freely without restriction.",
-    "true_label": "Assignment",
+    "id": "ren_001",
+    "clause_text": "Agreement auto-renews annually unless terminated with 90 days written notice.",
+    "true_label": "Renewal/Expiration",
     "true_risk": "MEDIUM"
+  },
+  {
+    "id": "ren_002",
+    "clause_text": "Contract expires on the end date. No automatic renewal. Continuation requires new agreement.",
+    "true_label": "Renewal/Expiration",
+    "true_risk": "NONE"
   },
   {
     "id": "ren_003",
@@ -504,10 +480,16 @@
     "true_risk": "MEDIUM"
   },
   {
-    "id": "ren_006",
-    "clause_text": "Agreement terminates automatically at end of term. Parties must negotiate and execute a new contract for any extension.",
-    "true_label": "Renewal/Expiration",
-    "true_risk": "NONE"
+    "id": "sev_001",
+    "clause_text": "No severance shall be paid upon termination for any reason whatsoever.",
+    "true_label": "Severance",
+    "true_risk": "HIGH"
+  },
+  {
+    "id": "sev_002",
+    "clause_text": "Employee receives 2 months severance pay on termination without cause.",
+    "true_label": "Severance",
+    "true_risk": "LOW"
   },
   {
     "id": "sev_003",
@@ -528,10 +510,16 @@
     "true_risk": "LOW"
   },
   {
-    "id": "sev_006",
-    "clause_text": "No severance is payable if employee is terminated for cause or resigns voluntarily under any circumstances.",
-    "true_label": "Severance",
+    "id": "aud_001",
+    "clause_text": "Client may audit vendor's systems and records at any time without prior notice.",
+    "true_label": "Audit Rights",
     "true_risk": "MEDIUM"
+  },
+  {
+    "id": "aud_002",
+    "clause_text": "Audit rights limited to financial records with 30 days advance written notice. Once per year maximum.",
+    "true_label": "Audit Rights",
+    "true_risk": "LOW"
   },
   {
     "id": "aud_003",
@@ -550,101 +538,5 @@
     "clause_text": "Company may conduct unannounced audits of all employee work product, communications, and personal devices at any time.",
     "true_label": "Audit Rights",
     "true_risk": "HIGH"
-  },
-  {
-    "id": "aud_006",
-    "clause_text": "Vendor grants audit rights to client upon reasonable notice. Audits limited to compliance verification only.",
-    "true_label": "Audit Rights",
-    "true_risk": "LOW"
-  },
-  {
-    "id": "indem_004",
-    "clause_text": "Each party shall indemnify the other for losses arising from its own breach of this agreement up to the contract value.",
-    "true_label": "Indemnification",
-    "true_risk": "LOW"
-  },
-  {
-    "id": "indem_005",
-    "clause_text": "Employee shall indemnify Company against all third party claims arising from employee's gross negligence or willful misconduct.",
-    "true_label": "Indemnification",
-    "true_risk": "MEDIUM"
-  },
-  {
-    "id": "indem_006",
-    "clause_text": "Contractor indemnifies client for all losses, costs, and expenses without any cap or limitation on the indemnity obligation.",
-    "true_label": "Indemnification",
-    "true_risk": "HIGH"
-  },
-  {
-    "id": "disp_004",
-    "clause_text": "All disputes shall be resolved exclusively by courts of England and Wales applying English law.",
-    "true_label": "Dispute Resolution",
-    "true_risk": "HIGH"
-  },
-  {
-    "id": "disp_005",
-    "clause_text": "Disputes escalate through negotiation, then mediation, then binding arbitration in Delhi under Indian Arbitration Act 1996.",
-    "true_label": "Dispute Resolution",
-    "true_risk": "NONE"
-  },
-  {
-    "id": "disp_006",
-    "clause_text": "Any dispute shall be referred to a sole arbitrator appointed by mutual consent. Seat of arbitration shall be Mumbai.",
-    "true_label": "Dispute Resolution",
-    "true_risk": "NONE"
-  },
-  {
-    "id": "pay_004",
-    "clause_text": "Compensation is reviewed annually at Company's sole discretion. No guaranteed minimum increase or maintenance of current salary.",
-    "true_label": "Payment Terms",
-    "true_risk": "HIGH"
-  },
-  {
-    "id": "pay_005",
-    "clause_text": "Payment of invoices within 45 days of receipt. Both parties agree to standard commercial payment terms.",
-    "true_label": "Payment Terms",
-    "true_risk": "LOW"
-  },
-  {
-    "id": "pay_006",
-    "clause_text": "Salary is fixed for the contract term and may not be reduced without employee's written consent.",
-    "true_label": "Payment Terms",
-    "true_risk": "LOW"
-  },
-  {
-    "id": "nc_006",
-    "clause_text": "Post-termination non-compete is limited to direct competitors in the same product category within the same country for 6 months.",
-    "true_label": "Non-Compete",
-    "true_risk": "LOW"
-  },
-  {
-    "id": "ip_006",
-    "clause_text": "IP assignment covers only work directly related to company projects. Side projects unrelated to company business are excluded.",
-    "true_label": "IP Assignment",
-    "true_risk": "LOW"
-  },
-  {
-    "id": "term_006",
-    "clause_text": "Either party may terminate for material breach with 14 days written notice and opportunity to cure within that period.",
-    "true_label": "Termination",
-    "true_risk": "LOW"
-  },
-  {
-    "id": "conf_006",
-    "clause_text": "Confidentiality obligations survive termination for 5 years. Standard carveouts for publicly available and independently developed information apply.",
-    "true_label": "Confidentiality/NDA",
-    "true_risk": "LOW"
-  },
-  {
-    "id": "liab_006",
-    "clause_text": "Each party's aggregate liability is capped at 12 months of fees paid. Cap applies equally to both parties.",
-    "true_label": "Liability Limitation",
-    "true_risk": "LOW"
-  },
-  {
-    "id": "gov_006",
-    "clause_text": "This agreement is governed by the laws of the State of New York. Disputes resolved in federal courts of New York.",
-    "true_label": "Governing Law",
-    "true_risk": "MEDIUM"
   }
 ]

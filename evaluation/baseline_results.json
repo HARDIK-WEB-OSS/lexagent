@@ -397,5 +397,362 @@
     "true_risk": "LOW",
     "pred_label": "Audit Rights",
     "pred_risk": "LOW"
+  },
+  {
+    "id": "ns_003",
+    "true_label": "Non-Solicitation",
+    "true_risk": "HIGH",
+    "pred_label": "Termination",
+    "pred_risk": "NONE"
+  },
+  {
+    "id": "ns_004",
+    "true_label": "Non-Solicitation",
+    "true_risk": "LOW",
+    "pred_label": "Termination",
+    "pred_risk": "NONE"
+  },
+  {
+    "id": "ns_005",
+    "true_label": "Non-Solicitation",
+    "true_risk": "HIGH",
+    "pred_label": "Termination",
+    "pred_risk": "HIGH"
+  },
+  {
+    "id": "ns_006",
+    "true_label": "Non-Solicitation",
+    "true_risk": "LOW",
+    "pred_label": "Termination",
+    "pred_risk": "NONE"
+  },
+  {
+    "id": "fm_003",
+    "true_label": "Force Majeure",
+    "true_risk": "HIGH",
+    "pred_label": "Force Majeure",
+    "pred_risk": "NONE"
+  },
+  {
+    "id": "fm_004",
+    "true_label": "Force Majeure",
+    "true_risk": "NONE",
+    "pred_label": "Force Majeure",
+    "pred_risk": "LOW"
+  },
+  {
+    "id": "fm_005",
+    "true_label": "Force Majeure",
+    "true_risk": "NONE",
+    "pred_label": "Force Majeure",
+    "pred_risk": "LOW"
+  },
+  {
+    "id": "fm_006",
+    "true_label": "Force Majeure",
+    "true_risk": "HIGH",
+    "pred_label": "Force Majeure",
+    "pred_risk": "NONE"
+  },
+  {
+    "id": "ucl_003",
+    "true_label": "Uncapped Liability",
+    "true_risk": "CRITICAL",
+    "pred_label": "Confidentiality/NDA",
+    "pred_risk": "NONE"
+  },
+  {
+    "id": "ucl_004",
+    "true_label": "Uncapped Liability",
+    "true_risk": "CRITICAL",
+    "pred_label": "Other",
+    "pred_risk": "NONE"
+  },
+  {
+    "id": "ucl_005",
+    "true_label": "Uncapped Liability",
+    "true_risk": "MEDIUM",
+    "pred_label": "Uncapped Liability",
+    "pred_risk": "HIGH"
+  },
+  {
+    "id": "ucl_006",
+    "true_label": "Uncapped Liability",
+    "true_risk": "LOW",
+    "pred_label": "Other",
+    "pred_risk": "LOW"
+  },
+  {
+    "id": "war_003",
+    "true_label": "Warranty",
+    "true_risk": "LOW",
+    "pred_label": "Warranty",
+    "pred_risk": "NONE"
+  },
+  {
+    "id": "war_004",
+    "true_label": "Warranty",
+    "true_risk": "HIGH",
+    "pred_label": "Warranty",
+    "pred_risk": "HIGH"
+  },
+  {
+    "id": "war_005",
+    "true_label": "Warranty",
+    "true_risk": "LOW",
+    "pred_label": "Warranty",
+    "pred_risk": "NONE"
+  },
+  {
+    "id": "war_006",
+    "true_label": "Warranty",
+    "true_risk": "HIGH",
+    "pred_label": "Warranty",
+    "pred_risk": "NONE"
+  },
+  {
+    "id": "dp_003",
+    "true_label": "Data Privacy",
+    "true_risk": "HIGH",
+    "pred_label": "Data Privacy",
+    "pred_risk": "NONE"
+  },
+  {
+    "id": "dp_004",
+    "true_label": "Data Privacy",
+    "true_risk": "LOW",
+    "pred_label": "Termination",
+    "pred_risk": "LOW"
+  },
+  {
+    "id": "dp_005",
+    "true_label": "Data Privacy",
+    "true_risk": "MEDIUM",
+    "pred_label": "Other",
+    "pred_risk": "NONE"
+  },
+  {
+    "id": "dp_006",
+    "true_label": "Data Privacy",
+    "true_risk": "LOW",
+    "pred_label": "Data Privacy",
+    "pred_risk": "NONE"
+  },
+  {
+    "id": "asgn_003",
+    "true_label": "Assignment",
+    "true_risk": "HIGH",
+    "pred_label": "IP Assignment",
+    "pred_risk": "MEDIUM"
+  },
+  {
+    "id": "asgn_004",
+    "true_label": "Assignment",
+    "true_risk": "LOW",
+    "pred_label": "IP Assignment",
+    "pred_risk": "MEDIUM"
+  },
+  {
+    "id": "asgn_005",
+    "true_label": "Assignment",
+    "true_risk": "MEDIUM",
+    "pred_label": "IP Assignment",
+    "pred_risk": "MEDIUM"
+  },
+  {
+    "id": "asgn_006",
+    "true_label": "Assignment",
+    "true_risk": "MEDIUM",
+    "pred_label": "IP Assignment",
+    "pred_risk": "MEDIUM"
+  },
+  {
+    "id": "ren_003",
+    "true_label": "Renewal/Expiration",
+    "true_risk": "MEDIUM",
+    "pred_label": "Renewal/Expiration",
+    "pred_risk": "MEDIUM"
+  },
+  {
+    "id": "ren_004",
+    "true_label": "Renewal/Expiration",
+    "true_risk": "NONE",
+    "pred_label": "Renewal/Expiration",
+    "pred_risk": "NONE"
+  },
+  {
+    "id": "ren_005",
+    "true_label": "Renewal/Expiration",
+    "true_risk": "MEDIUM",
+    "pred_label": "Renewal/Expiration",
+    "pred_risk": "NONE"
+  },
+  {
+    "id": "ren_006",
+    "true_label": "Renewal/Expiration",
+    "true_risk": "NONE",
+    "pred_label": "Termination",
+    "pred_risk": "NONE"
+  },
+  {
+    "id": "sev_003",
+    "true_label": "Severance",
+    "true_risk": "LOW",
+    "pred_label": "Termination",
+    "pred_risk": "NONE"
+  },
+  {
+    "id": "sev_004",
+    "true_label": "Severance",
+    "true_risk": "HIGH",
+    "pred_label": "Severance",
+    "pred_risk": "NONE"
+  },
+  {
+    "id": "sev_005",
+    "true_label": "Severance",
+    "true_risk": "LOW",
+    "pred_label": "Termination",
+    "pred_risk": "NONE"
+  },
+  {
+    "id": "sev_006",
+    "true_label": "Severance",
+    "true_risk": "MEDIUM",
+    "pred_label": "Termination",
+    "pred_risk": "HIGH"
+  },
+  {
+    "id": "aud_003",
+    "true_label": "Audit Rights",
+    "true_risk": "MEDIUM",
+    "pred_label": "Audit Rights",
+    "pred_risk": "MEDIUM"
+  },
+  {
+    "id": "aud_004",
+    "true_label": "Audit Rights",
+    "true_risk": "LOW",
+    "pred_label": "Audit Rights",
+    "pred_risk": "LOW"
+  },
+  {
+    "id": "aud_005",
+    "true_label": "Audit Rights",
+    "true_risk": "HIGH",
+    "pred_label": "IP Assignment",
+    "pred_risk": "NONE"
+  },
+  {
+    "id": "aud_006",
+    "true_label": "Audit Rights",
+    "true_risk": "LOW",
+    "pred_label": "Audit Rights",
+    "pred_risk": "LOW"
+  },
+  {
+    "id": "indem_004",
+    "true_label": "Indemnification",
+    "true_risk": "LOW",
+    "pred_label": "Indemnification",
+    "pred_risk": "NONE"
+  },
+  {
+    "id": "indem_005",
+    "true_label": "Indemnification",
+    "true_risk": "MEDIUM",
+    "pred_label": "Indemnification",
+    "pred_risk": "NONE"
+  },
+  {
+    "id": "indem_006",
+    "true_label": "Indemnification",
+    "true_risk": "HIGH",
+    "pred_label": "Indemnification",
+    "pred_risk": "NONE"
+  },
+  {
+    "id": "disp_004",
+    "true_label": "Dispute Resolution",
+    "true_risk": "HIGH",
+    "pred_label": "Dispute Resolution",
+    "pred_risk": "NONE"
+  },
+  {
+    "id": "disp_005",
+    "true_label": "Dispute Resolution",
+    "true_risk": "NONE",
+    "pred_label": "Dispute Resolution",
+    "pred_risk": "NONE"
+  },
+  {
+    "id": "disp_006",
+    "true_label": "Dispute Resolution",
+    "true_risk": "NONE",
+    "pred_label": "Dispute Resolution",
+    "pred_risk": "LOW"
+  },
+  {
+    "id": "pay_004",
+    "true_label": "Payment Terms",
+    "true_risk": "HIGH",
+    "pred_label": "Payment Terms",
+    "pred_risk": "HIGH"
+  },
+  {
+    "id": "pay_005",
+    "true_label": "Payment Terms",
+    "true_risk": "LOW",
+    "pred_label": "Payment Terms",
+    "pred_risk": "LOW"
+  },
+  {
+    "id": "pay_006",
+    "true_label": "Payment Terms",
+    "true_risk": "LOW",
+    "pred_label": "Payment Terms",
+    "pred_risk": "NONE"
+  },
+  {
+    "id": "nc_006",
+    "true_label": "Non-Compete",
+    "true_risk": "LOW",
+    "pred_label": "Non-Compete",
+    "pred_risk": "LOW"
+  },
+  {
+    "id": "ip_006",
+    "true_label": "IP Assignment",
+    "true_risk": "LOW",
+    "pred_label": "IP Assignment",
+    "pred_risk": "MEDIUM"
+  },
+  {
+    "id": "term_006",
+    "true_label": "Termination",
+    "true_risk": "LOW",
+    "pred_label": "Termination",
+    "pred_risk": "NONE"
+  },
+  {
+    "id": "conf_006",
+    "true_label": "Confidentiality/NDA",
+    "true_risk": "LOW",
+    "pred_label": "Confidentiality/NDA",
+    "pred_risk": "LOW"
+  },
+  {
+    "id": "liab_006",
+    "true_label": "Liability Limitation",
+    "true_risk": "LOW",
+    "pred_label": "Payment Terms",
+    "pred_risk": "LOW"
+  },
+  {
+    "id": "gov_006",
+    "true_label": "Governing Law",
+    "true_risk": "MEDIUM",
+    "pred_label": "Dispute Resolution",
+    "pred_risk": "NONE"
   }
 ]
